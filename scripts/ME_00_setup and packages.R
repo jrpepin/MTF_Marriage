@@ -57,7 +57,7 @@ conflict_prefer("arrange", "dplyr")
 ## Set the project directory to the current working directory.
 projDir <- here::here()                                                # File path to this project's directory
 dataDir <- "./../../../Dropbox/Data/@Monitoring the Future/icpsr_data" # File path to where data will be downloaded
-outDir  <- "output"                                                    # Name of the sub-folder where we will save results
+outDir  <- "docs"                                                      # Name of the sub-folder where we will save results
 
 ## This will create sub-directory folders in the master project directory if doesn't exist
 if (!dir.exists(here::here(outDir))){

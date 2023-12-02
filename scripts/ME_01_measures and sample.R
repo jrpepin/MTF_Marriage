@@ -45,7 +45,7 @@ conflict_prefer("count", "dplyr")
 ## Specify the file paths
 projDir <- here::here()                                                # File path to this project's directory
 dataDir <- "./../../../Dropbox/Data/@Monitoring the Future/icpsr_data" # File path to where data will be downloaded
-outDir  <- "output"                                                    # Name of the sub-folder where we will save results
+outDir  <- "docs"                                                      # Name of the sub-folder where we will save results
 
 load(paste0(dataDir, "/mtf_form2.Rda"))
 
