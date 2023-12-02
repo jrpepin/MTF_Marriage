@@ -1,6 +1,4 @@
-# MTF_Marriage
-
-Marriage Expectations of U.S. twelfth graders
+# Marriage Expectations of U.S. twelfth graders
 
 This repository analyzes data from the [Monitoring the Future (MTF) Public-Use Cross-Sectional Datasets (1976-2022)](https://www.icpsr.umich.edu/web/ICPSR/series/35). It creates a visualization of trends in U.S. twelfth graders marriage expectations by gender, racial group, and mothers' education.
 
