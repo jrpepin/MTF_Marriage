@@ -1,0 +1,84 @@
+#-------------------------------------------------------------------------------
+# MARRIAGE ATTITUDES PROJECT
+# MA_02_analysis an figures.R
+# Joanna R. Pepin
+#-------------------------------------------------------------------------------
+
+## create survey data
+mtf_svy <- data %>%
+  drop_na(mardum) %>%
+  as_survey_design(weights = svyweight)
+
+## Create yearly averages
+mar_yr <- mtf_svy %>%
+  group_by(year, mardum) %>%
+  summarize(prop = survey_mean(na.rm = TRUE, vartype = "ci"))
+
+
+mar_yr %>%
+  filter(mardum == 1) %>%
+  ggplot(aes(x = year, y = prop, ymin = prop_low, ymax = prop_upp)) +
+  geom_line() +
+  geom_point() +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1), limits = c(.5, 1)) +
+  geom_pointrange(color = "#605A52") +
+  theme_minimal() +
+  theme(strip.text.x       = element_text(face = "bold"),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        plot.caption       = element_text(color = "grey70", face = "italic")) +
+  labs( x        = " ", 
+        y        = " ", 
+        title    = "Percent of U.S. twelfth-graders who think they 'will get married'",
+        caption  = "Monitoring the Future Surveys 1976-2021")
+  
+# Mode sensitivity check
+## Create yearly averages
+mar_mode <- mtf_svy %>%
+  drop_na(tablet) %>%
+  group_by(tablet, mardum) %>%
+  summarize(prop = survey_mean(na.rm = TRUE, vartype = "ci"))
+
+
+mar_mode %>%
+  filter(mardum == 1) %>%
+  ggplot(aes(x = tablet, y = prop, ymin = prop_low, ymax = prop_upp)) +
+  geom_pointrange(color = "#605A52") +
+  geom_point() +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1), limits = c(.5, 1)) +
+  theme_minimal() +
+  theme(strip.text.x       = element_text(face = "bold"),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        plot.caption       = element_text(color = "grey70", face = "italic")) +
+  labs( x        = " ", 
+        y        = " ", 
+        title    = "Percent of 2019 U.S. twelfth-graders who think they 'will get married'",
+        subtitle = "R received tablet or paper survey",
+        caption  = "2019 Monitoring the Future Survey")
+
+
+## 3 cat
+
+## Create yearly averages
+mar_yr_3 <- mtf_svy %>%
+  group_by(year, mar3) %>%
+  summarize(prop = survey_mean(na.rm = TRUE, vartype = "ci"))
+
+mar_yr_3$mar3 <- factor(mar_yr_3$mar3, levels = c("GETTING MARRIED", "I HAVE NO IDEA", "NOT GETTING MARRIED"), ordered = FALSE)
+
+mar_yr_3 %>%
+  ggplot(aes(x = year, y = prop, color = mar3, ymin = prop_low, ymax = prop_upp)) +
+  geom_pointrange(aes(shape=mar3)) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1), limits = c(0, 1)) +
+    theme_minimal() +
+  theme(strip.text.x       = element_text(face = "bold"),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        plot.caption       = element_text(color = "grey70", face = "italic")) +
+  labs( x        = " ", 
+        y        = " ", 
+        title    = "U.S. twelfth-graders marriage expectations",
+        caption  = "Monitoring the Future Surveys 1976-2021")
+
+  

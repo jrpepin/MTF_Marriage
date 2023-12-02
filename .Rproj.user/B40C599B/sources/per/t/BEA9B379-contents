@@ -1,0 +1,158 @@
+#-------------------------------------------------------------------------------
+# MARRIAGE ATTITUDES PROJECT
+# MA_01_measures and sample.R
+# Joanna R. Pepin
+#-------------------------------------------------------------------------------
+
+# Project Environment ----------------------------------------------------------
+## If not starting from GA_00: setup the repository environment.
+## If starting from GA_00: skip this section.
+
+## Load the packages
+library("pacman")                  # Load pacman package
+
+pacman::p_load(
+  here,       # relative file paths
+  foreign,    # read data
+  plyr,       #
+  dplyr,      # variable processing
+  tidyr,      # reshaping data
+  forcats,    # reverse factor variables
+  srvyr,      # calc % with survey weights
+  purrr,      # to use modify_at
+  MESS,       # round prop & preserve sum to 100%
+  data.table, #
+  gtsummary,  # pretty weighted tables
+  ggplot2,    # graphing
+  colorspace, # color palettes   
+  conflicted) # choose default packages
+
+## Address any conflicts in the packages
+conflict_scout() # identify the conflicts
+conflict_prefer("here", "here")
+conflict_prefer("mutate", "dplyr")
+conflict_prefer("filter", "dplyr")
+conflict_prefer("summarize", "dplyr")
+conflict_prefer("arrange", "dplyr")
+
+
+## Specify the file paths
+projDir <- here::here()                                     # File path to this project's directory
+dataDir <- "./../../Data/@Monitoring the Future/icpsr_data" # File path to where data will be downloaded
+outDir  <- "output"                                         # Name of the sub-folder where we will save results
+figDir  <- file.path(outDir, "figs")                        # Name of the sub-folder where we will save generated figures
+
+load(paste0(dataDir, "/mtf_form2.Rda"))
+
+################################################################################
+
+# VARIABLES --------------------------------------------------------------------
+
+## Create crosswalk of survey year and ICPSR Study ID 
+studyid    <- c( 7927,  7928,  7929,  7930,
+                 7900,  9013,  9045,  8387,  8388,
+                 8546,  8701,  9079,  9259,  9397,
+                 9745,  9871,  6133,  6367,  6517,
+                 6716,  2268,  2477,  2751,  2939,
+                 3184,  3425,  3753,  4019,  4264,
+                 4536, 20022, 22480, 25382, 28401,
+                30985, 34409, 34861, 35218, 36263,
+                36408, 36798, 37182, 37416, 37841,
+                38156, 38503, 38882)
+
+surveyyear <- c(1976, 1977, 1978, 1979,
+                1980, 1981, 1982, 1983, 1984,
+                1985, 1986, 1987, 1988, 1989,
+                1990, 1991, 1992, 1993, 1994,
+                1995, 1996, 1997, 1998, 1999,
+                2000, 2001, 2002, 2003, 2004,
+                2005, 2006, 2007, 2008, 2009,
+                2010, 2011, 2012, 2013, 2014,
+                2015, 2016, 2017, 2018, 2019,
+                2020, 2021, 2022)
+
+Xwalk <- data.frame(surveyyear, studyid)
+
+# Set-up the data --------------------------------------------------------------
+
+## Select Variables
+data <- select(mtf_V2, V5, ARCHIVE_WT, V1, V13, TABLET,     # Survey variables
+               V2239,                                       # Project specific
+               V2151, V2150, V2164, V2165)                  # Demographic
+
+## Rename Variables
+data <- dplyr::rename(data,      
+                      wt7611 = V5,       wt1222 = ARCHIVE_WT,  getmar   = V2239,
+                      raceeth  = V2151,  year   = V1,          region   = V13,
+                      gender   = V2150,  momed  = V2164,       momemp   = V2165)
+
+################################################################################
+# PROCESS VARIABLES ------------------------------------------------------------
+
+## Year
+data$year <- as.character(data$year)
+data$year[data$year == "76"] <- "1976"
+data$year[is.na(data$year)]  <- "1978" # 34 people in 1978 have a missing year variable
+
+data$year <- as.integer(data$year)
+
+## Weights
+table(data$year, !is.na(data$wt7611))
+table(data$year, !is.na(data$wt1222))
+
+data <- data %>%
+  mutate(
+    svyweight = case_when(
+      year  <= 2011 ~ wt7611,
+      year  >= 2012 ~ wt1222))
+
+## Get Married
+data %>%
+  filter(year != 1993  & year <= 1998) %>%
+  dplyr::count(getmar)
+data %>%
+  filter(year== 1993 | year > 1998) %>%
+  dplyr::count(getmar)
+
+data <- data %>%
+  mutate(
+    newmar = case_when(
+      getmar == 1 | getmar == "NT MARRY" | getmar == "NT MARRY:(1)" | getmar == "Not getting married" | getmar == "NOT MAR:(1)"            ~ "NOT GETTING MARRIED",
+      getmar == 2 | getmar == "NO IDEA"  | getmar == "NO IDEA:(2)"  | getmar == "I have no idea"                                           ~ "I HAVE NO IDEA",
+      getmar == 3 | getmar == "MARRY"    | getmar == "MARRY:(3)"    | getmar == "Getting married"     | getmar == "MARRIED:(3)"            ~ "GETTING MARRIED",
+      getmar == 8                        | getmar == "MARRIED:(8)"                                    | getmar == "ALREADY MAR:(8)"        ~ "ALREADY MARRIED",
+      getmar == 9 | getmar == "MISSING"  | getmar == "MISSING:(-9)" | getmar == "Missing"             | getmar == "R ASSIGNED ORANGE:(-8)" | 
+      getmar == 0 ~ "MISSING")) 
+      
+# miss <- data[is.na(data$newmar),] # 15 obs w/ 0 across years and not in codebook
+
+data$newmar <- factor(data$newmar, levels = c("GETTING MARRIED", "NOT GETTING MARRIED", "I HAVE NO IDEA", 
+                                              "ALREADY MARRIED", "MISSING"), ordered = FALSE) 
+### 3 category variable
+data <- data %>%
+  mutate(
+    mar3 = case_when(
+      newmar == "GETTING MARRIED" | newmar == "ALREADY MARRIED" ~ "GETTING MARRIED",
+      newmar == "NOT GETTING MARRIED"                           ~ "NOT GETTING MARRIED",
+      newmar == "I HAVE NO IDEA"                                ~ "I HAVE NO IDEA",
+      TRUE                                                      ~  NA_character_ ))
+
+data$mar3 <- factor(data$mar3, levels = c("GETTING MARRIED", "NOT GETTING MARRIED", "I HAVE NO IDEA"), ordered = FALSE) 
+
+### a dummy variable
+data <- data %>%
+  mutate(
+    mardum = case_when(
+      mar3     == "GETTING MARRIED"      ~ 1,
+      mar3     == "NOT GETTING MARRIED"  |
+      mar3     == "I HAVE NO IDEA"       ~ 0))
+
+
+## MODE variable
+
+data <- data %>%
+  mutate(
+    tablet = case_when(
+      TABLET == "TABLET:(1)" & year == 2019 ~ "Tablet",
+      TABLET == "PAPER:(0)"  & year == 2019 ~ "Paper",
+      TRUE ~ NA_character_))
