@@ -1,6 +1,6 @@
 #-------------------------------------------------------------------------------
-# MARRIAGE ATTITUDES PROJECT
-# MA_01_measures and sample.R
+# MARRIAGE EXPECTATIONS PROJECT
+# ME_01_measures and sample.R
 # Joanna R. Pepin
 #-------------------------------------------------------------------------------
 
