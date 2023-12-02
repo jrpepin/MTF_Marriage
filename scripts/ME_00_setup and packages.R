@@ -1,6 +1,6 @@
 #-------------------------------------------------------------------------------
-# MARRIAGE ATTITUDES PROJECT
-# MA_00_setup and packages.R
+# MARRIAGE EXPECTATIONS PROJECT
+# ME_00_setup and packages.R
 # Joanna R. Pepin
 #-------------------------------------------------------------------------------
 
