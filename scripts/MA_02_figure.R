@@ -45,7 +45,7 @@ df3 <- mtf_svy %>%
 #### Combine dfs
 df1$cat    <- "Gender" 
 df2$cat    <- "Race" 
-df3$cat    <- "Mother's education" 
+df3$cat    <- "Mothers' education" 
 
 colnames(df1)[colnames(df1)=="sex"]   <- "demo"
 colnames(df2)[colnames(df2)=="race"]  <- "demo"
@@ -54,7 +54,7 @@ colnames(df3)[colnames(df3)=="momed"] <- "demo"
 df4 <- rbind(df1, df2, df3)
 
 df4$cat <- factor(df4$cat, levels = c("Gender", "Race", 
-                                      "Mother's education"), ordered = FALSE)
+                                      "Mothers' education"), ordered = FALSE)
 
 ## Point Change dfs
 
@@ -95,12 +95,12 @@ df_pc3 <- df3 %>%
 #### Combine dfs
 df_pc1$cat    <- "Gender" 
 df_pc2$cat    <- "Race" 
-df_pc3$cat    <- "Mother's education" 
+df_pc3$cat    <- "Mothers' education" 
 
 df_pc4 <- rbind(df_pc1, df_pc2, df_pc3)
 
 df_pc4$cat <- factor(df_pc4$cat, levels = c("Gender", "Race", 
-                                            "Mother's education"), ordered = FALSE)
+                                            "Mothers' education"), ordered = FALSE)
 
 # VISUALIZE ------------------------------------------------------------------
 ## Prep the data for plotting
