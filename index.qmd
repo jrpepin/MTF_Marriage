@@ -40,7 +40,7 @@ marriage, attitudes, adolescents, visualization
 #| file: scripts/ME_02_figure.R
 ```
 
-```{r figure-02}
+```{r figure-02, fig.width=6.5, fig.height=8}
 #| echo: false
 #| tbl-cap: ""
 
