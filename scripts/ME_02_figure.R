@@ -4,6 +4,14 @@
 # Joanna R. Pepin
 #-------------------------------------------------------------------------------
 
+# Project Environment ----------------------------------------------------------
+## The ME_00-1_setup and packages.R script  & ME_01_measures and sample.R
+## should should be run before this script.
+
+# source(ME_00-1_setup and packages.R)
+# source(ME_01_measures and sample.R)
+
+
 # Define color palette ---------------------------------------------------------
 mar3_palette = c("#18BC9C", "#E74C3C", "#3498DB")
 

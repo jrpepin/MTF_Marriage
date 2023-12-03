@@ -51,6 +51,7 @@ conflict_prefer("mutate", "dplyr")
 conflict_prefer("filter", "dplyr")
 conflict_prefer("summarize", "dplyr")
 conflict_prefer("arrange", "dplyr")
+conflict_prefer("count", "dplyr")
 
 # Set-up the Directories -------------------------------------------------------
 

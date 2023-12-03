@@ -5,48 +5,9 @@
 #-------------------------------------------------------------------------------
 
 # Project Environment ----------------------------------------------------------
-## If not starting from MA_00: setup the repository environment.
-## If starting from GA_00: skip this section.
+## The ME_00-1_setup and packages.R script should be run before this script
 
-## Load the packages
-library("pacman")                  # Load pacman package
-
-pacman::p_load(
-  here,       # relative file paths
-  foreign,    # read data
-  plyr,       #
-  dplyr,      # variable processing
-  tidyr,      # reshaping data
-  forcats,    # reverse factor variables
-  srvyr,      # calc % with survey weights
-  scales,     # % in ggplots
-  purrr,      # to use modify_at
-  MESS,       # round prop & preserve sum to 100%
-  data.table, #
-  survey,     # create weighted dataset for tables
-  gtsummary,  # pretty weighted tables
-  flextable,  # displaying pretty tables
-  ggplot2,    # graphing
-  colorspace, # color palettes
-  ggtext,     # color text labels
-  ggpubr,     # stitch plots together
-  conflicted) # choose default packages
-
-## Address any conflicts in the packages
-conflict_scout() # identify the conflicts
-conflict_prefer("here", "here")
-conflict_prefer("mutate", "dplyr")
-conflict_prefer("filter", "dplyr")
-conflict_prefer("summarize", "dplyr")
-conflict_prefer("arrange", "dplyr")
-conflict_prefer("count", "dplyr")
-
-
-## Specify the file paths
-projDir <- here::here()                                                # File path to this project's directory
-dataDir <- "./../../../Dropbox/Data/@Monitoring the Future/icpsr_data" # File path to where data will be downloaded
-outDir  <- "docs"                                                      # Name of the sub-folder where we will save results
-
+# source(ME_00-1_setup and packages.R)
 
 # DATA -------------------------------------------------------------------------
 load(paste0(dataDir, "/mtf_form2.Rda"))
