@@ -5,3 +5,6 @@
 *.docx
 *.txt
 *.pdf
+/.quarto/
+/_site/
+
