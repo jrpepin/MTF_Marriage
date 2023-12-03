@@ -1,0 +1,17 @@
+---
+title: "Marriage Expectations"
+author: "Joanna R. Pepin and Philip N. Cohen"
+date: today
+project:
+  title: "index"
+  type: website
+  output-dir: docs
+---
+
+# Abstract
+
+Fascinating words go here.
+
+### Keywords
+
+marriage, attitudes, adolescents, visualization
