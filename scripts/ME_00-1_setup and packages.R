@@ -38,6 +38,7 @@ pacman::p_load(
   colorspace, # color palettes
   ggtext,     # color text labels and hyperlinks
   ggpubr,     # stitch plots together
+  kableExtra, # render tables
   conflicted) # choose default packages
 
 

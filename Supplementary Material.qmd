@@ -1,0 +1,58 @@
+---
+title: "Supplementary Material"
+author: "Joanna R. Pepin and Philip N. Cohen"
+date: today
+project:
+  title: "supp"
+  type: website
+  output-dir: docs
+  execute-dir: project
+format: html
+---
+
+Full replication code for data access, variable construction, cell sizes and distribution, chi-squared tests, and data visualization creation is available in a Github repository: <https://github.com/jrpepin/MTF_Marriage>.
+
+```{r setup}
+#| echo: false
+#| output: false
+#| tbl-cap: ""
+#| file: scripts/ME_00-1_setup and packages.R
+```
+
+```{r measures}
+#| echo: false
+#| output: false
+#| tbl-cap: ""
+#| file: scripts/ME_01_measures and sample.R
+```
+
+```{r figure-01}
+#| echo: false
+#| output: false
+#| tbl-cap: ""
+#| file: scripts/ME_02_figure.R
+```
+
+# Data --------------------------------------------------------------
+
+# Measures -------------------------------------------------------
+
+## *Marriage expectations*
+
+## *Gender*
+
+## *Race*
+
+## *Mothers' education*
+
+# Sample ----------------------------------------------------------
+
+```{r table01, echo=FALSE}
+#| echo: false
+#| tbl-cap: "Summary statistics of the pooled (weighted) analytic sample"
+knit_print(tabA)
+
+```
+
+# Chi-squared tests ---------------------------------------------
+
