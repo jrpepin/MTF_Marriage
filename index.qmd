@@ -29,7 +29,7 @@ marriage, attitudes, adolescents, visualization
 [motivation paragraph]
 
 [data/methods]
-Additional details are available in the [online supplement](https://jrpepin.github.io/MTF_Marriage/Supplementary-Material.html) and data access and replication code are available at: [https://github.com/jrpepin/MTF_Marriage](https://github.com/jrpepin/MTF_Marriage).
+Additional details are available in the [online supplement](https://jrpepin.github.io/MTF_Marriage/Supplementary Material.html) and data access and replication code are available at: [https://github.com/jrpepin/MTF_Marriage](https://github.com/jrpepin/MTF_Marriage).
 
 [findings]
 
