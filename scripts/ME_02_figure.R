@@ -233,5 +233,6 @@ ptext <- annotate_figure(p,
   available at: https://github.com/jrpepin/MTF_Marriage.
   ", 
                 hjust = 0, x = 0, size = 9))
+ptext
 
 ggsave("marfig.png", ptext, width = 6.5, height = 8.5, dpi = 300, bg = 'white')
