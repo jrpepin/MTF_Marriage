@@ -5,5 +5,40 @@
     "title": "Marriage Expectations",
     "section": "",
     "text": "Abstract\nUsing Monitoring the Future (MTF) Public-Use Cross-Sectional Datasets (1976-2022), this visualization presents U.S. twelfth graders marriage expectations by gender, racial group, and mothers’ education. It shows…\n\nKeywords\nmarriage, attitudes, adolescents, visualization\n\n[motivation paragraph]\n[data/methods] Additional details are available in the online supplement and data access and replication code are available at: https://github.com/jrpepin/MTF_Marriage.\n[findings]\n\n\n\n\n\n[more findings]\n\n\n\nReferences"
+  },
+  {
+    "objectID": "Supplementary Material.html",
+    "href": "Supplementary Material.html",
+    "title": "Supplementary Material",
+    "section": "",
+    "text": "Full replication code for data access, variable construction, cell sizes and distribution, chi-squared tests, and data visualization creation is available in a Github repository: https://github.com/jrpepin/MTF_Marriage."
+  },
+  {
+    "objectID": "Supplementary Material.html#marriage-expectations",
+    "href": "Supplementary Material.html#marriage-expectations",
+    "title": "Supplementary Material",
+    "section": "Marriage expectations",
+    "text": "Marriage expectations"
+  },
+  {
+    "objectID": "Supplementary Material.html#gender",
+    "href": "Supplementary Material.html#gender",
+    "title": "Supplementary Material",
+    "section": "Gender",
+    "text": "Gender"
+  },
+  {
+    "objectID": "Supplementary Material.html#race",
+    "href": "Supplementary Material.html#race",
+    "title": "Supplementary Material",
+    "section": "Race",
+    "text": "Race"
+  },
+  {
+    "objectID": "Supplementary Material.html#mothers-education",
+    "href": "Supplementary Material.html#mothers-education",
+    "title": "Supplementary Material",
+    "section": "Mothers’ education",
+    "text": "Mothers’ education"
   }
 ]
