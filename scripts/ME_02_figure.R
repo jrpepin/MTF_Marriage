@@ -226,7 +226,7 @@ p <- ggarrange(p1, p3, p2, p4,
                ncol = 2, nrow = 2, heights = c(1, 2), widths = c(1.75,1))
 p
 
-pwtext <- annotate_figure(p, 
+ptext <- annotate_figure(p, 
                 bottom = text_grob("  Figure 1. Data are from the Monitoring the Future Surveys (U.S.), 1976-2022.
   Sampling weights are used to adjust for the complex sampling process of the survey.
   Additional details about data access, variable construction, and chi-squared tests between survey years are
@@ -234,4 +234,4 @@ pwtext <- annotate_figure(p,
   ", 
                 hjust = 0, x = 0, size = 9))
 
-ggsave("marfig.png", pwtext, width = 6.5, height = 8.5, dpi = 300, bg = 'white')
+ggsave("marfig.png", ptext, width = 6.5, height = 8.5, dpi = 300, bg = 'white')

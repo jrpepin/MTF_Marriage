@@ -62,9 +62,10 @@ marriage, attitudes, adolescents, visualization
 #| echo: false
 #| tbl-cap: ""
 
-p
+ptext
 
 ```
 
+[more findings]
 
 # References 
