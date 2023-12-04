@@ -131,8 +131,8 @@ p1 <- df0 %>%
   geom_hline(yintercept=.5, color = "grey90") +
   labs( x        = " ", 
         y        = " ", 
-        title    = "U.S. twelfth-graders marriage expectations",
-        subtitle = "Panel A. % who think they will _______")
+        title    = " U.S. twelfth-graders marriage expectations",
+        subtitle = " Panel A. % who think they will _______")
 
 p1
 
@@ -162,7 +162,7 @@ p2 <- df4 %>%
   geom_hline(yintercept=.5, color = "grey90") +
   labs( x        = " ", 
         y        = " ",
-        subtitle = "Panel B. % of U.S. twelfth-graders who think they will <span style = 'color: #18BC9C;'>'get married'</span>")
+        subtitle = " Panel B. % of U.S. twelfth-graders who think they will <span style = 'color: #18BC9C;'>'get married'</span>")
 p2
 
 ### Graphing % point change
@@ -193,33 +193,32 @@ p3 <- df_pc0 %>%
 p3
 
 p4 <- df_pc4 %>%
-  ggplot(aes(x=demo, y= pct_chg, fill = demo)) +
+  ggplot(aes(x = demo, y = pct_chg, fill = demo)) +
   geom_col(aes(alpha = .9), width = 0.3) +
   geom_hline(yintercept = 0) +
   facet_wrap("cat", ncol = 1, scales = "free_x") +
   geom_text(aes(label = label, vjust = -0.5)) +
   scale_y_continuous(limits = c(-.15, 0.05)) +
   theme_minimal() +
-  scale_fill_manual(values = c(c_palette, 
-                               c_palette, 
-                               c_palette)) +
-  theme(strip.text.x       = element_blank(),
-        axis.text.x        = element_markdown(colour = c(c_palette)),
-        axis.text.y        = element_blank(), 
-        axis.ticks.y       = element_blank(),
-        panel.grid.minor   = element_blank(),
-        panel.grid.major   = element_blank(),
-        plot.caption       = element_text(color = "grey70", face = "italic"),
-        legend.position    = "none") +
-  scale_x_discrete(position = "top",
-                   labels=c("Men" = "Men", "Women" = "Women",
-                            "White" = "White", "Black" = "Black",
-                            "No college degree" = "No college\ndegree",
-                            "Completed college" = "College\ndegree")) +
-  labs( x        = " ", 
+  scale_fill_manual(values  = c(c_palette, 
+                                c_palette, 
+                                c_palette)) +
+  theme(strip.text.x          = element_blank(),
+        axis.text.x           = element_markdown(colour = c(c_palette)),
+        axis.text.y           = element_blank(), 
+        axis.ticks.y          = element_blank(),
+        panel.grid.minor      = element_blank(),
+        panel.grid.major      = element_blank(),
+        legend.position       = "none") +
+  scale_x_discrete(position   = "top",
+                   labels     = c("Men"   = "Men", "Women" = "Women",
+                                  "White" = "White", "Black" = "Black",
+                                  "No college degree" = "No college\ndegree",
+                                  "Completed college" = "College\ndegree")) +
+  labs( title    = " ",
+        x        = " ", 
         y        = " ",
-        caption  = "Monitoring the Future Surveys 1976-2022",
-        title    = " ")
+        caption  = " ")
 p4
 
 ### Put it all together
@@ -227,4 +226,12 @@ p <- ggarrange(p1, p3, p2, p4,
                ncol = 2, nrow = 2, heights = c(1, 2), widths = c(1.75,1))
 p
 
-ggsave("marfig.png", p, width = 6.5, height = 8, dpi = 300, bg = 'white')
+pwtext <- annotate_figure(p, 
+                bottom = text_grob("  Figure 1. Data are from the Monitoring the Future Surveys (U.S.), 1976-2022.
+  Sampling weights are used to adjust for the complex sampling process of the survey.
+  Additional details about data access, variable construction, and chi-squared tests between survey years are
+  available at: https://github.com/jrpepin/MTF_Marriage.
+  ", 
+                hjust = 0, x = 0, size = 9))
+
+ggsave("marfig.png", pwtext, width = 6.5, height = 8.5, dpi = 300, bg = 'white')

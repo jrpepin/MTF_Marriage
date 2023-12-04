@@ -36,7 +36,7 @@ pacman::p_load(
   flextable,  # displaying pretty tables
   ggplot2,    # graphing
   colorspace, # color palettes
-  ggtext,     # color text labels
+  ggtext,     # color text labels and hyperlinks
   ggpubr,     # stitch plots together
   conflicted) # choose default packages
 
@@ -68,7 +68,7 @@ if (!dir.exists(here::here(outDir))){
 }
 
 # Download the data ------------------------------------------------------------
-## Users should remove the # before the next line to run the data download script 1X.
+## Users should remove the # before the source() line to run the data download.
 ## This script only needs to be run the first time and if there is a new wave of data.
 
 # source(ME_00-2_data download.R)

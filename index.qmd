@@ -8,16 +8,34 @@ project:
   output-dir: docs
   execute-dir: project
 ---
+```{r notes}
+#| echo: false
+#| output: false
+#| tbl-cap: ""
+
+# Abstract: 200 words or less
+# Main text: [approximately 500 words (excluding caption & references)]
+
+```
+
 
 # Abstract
 
-Fascinating words go here.
+Using [Monitoring the Future (MTF) Public-Use Cross-Sectional Datasets (1976-2022)](https://www.icpsr.umich.edu/web/ICPSR/series/35), this visualization presents U.S. twelfth graders marriage expectations by gender, racial group, and mothers' education. It shows...
+
 
 ### Keywords
 
 marriage, attitudes, adolescents, visualization
 
 ---
+
+[motivation paragraph]
+
+[data/methods]
+
+[findings]
+
 
 ```{r setup}
 #| echo: false
@@ -47,3 +65,6 @@ marriage, attitudes, adolescents, visualization
 p
 
 ```
+
+
+# References 
