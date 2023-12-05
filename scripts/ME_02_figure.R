@@ -144,7 +144,7 @@ p2 <- df4 %>%
   geom_pointrange(aes(alpha = .9)) +
   facet_wrap("cat", ncol = 1)  +
   scale_y_continuous(labels = scales::percent_format(accuracy = 1), 
-                     limits = c(.5, 1), 
+                     limits = c(.4, 1), 
                      breaks = c(.5, .75, 1)) +
   scale_color_manual(values = c(c_palette, 
                                 c_palette, 
