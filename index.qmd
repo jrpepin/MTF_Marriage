@@ -2,6 +2,7 @@
 title: "Marriage Expectations"
 author: "Joanna R. Pepin and Philip N. Cohen"
 date: today
+bibliography: references.bib
 ---
 
 ```{r notes}
@@ -14,25 +15,23 @@ date: today
 
 ```
 
-
 # Abstract
 
 Using [Monitoring the Future (MTF) Public-Use Cross-Sectional Datasets (1976-2022)](https://www.icpsr.umich.edu/web/ICPSR/series/35), this visualization presents U.S. twelfth graders marriage expectations by gender, racial group, and mothers' education. It shows...
-
 
 ### Keywords
 
 marriage, attitudes, adolescents, visualization
 
----
+------------------------------------------------------------------------
 
-[motivation paragraph]
+\[motivation paragraph\]
 
-[data/methods]
-Additional details are available in the [online supplement](https://jrpepin.github.io/MTF_Marriage/Supplementary Material.html) and data access and replication code are available at: [https://github.com/jrpepin/MTF_Marriage](https://github.com/jrpepin/MTF_Marriage).
+We used data from the 1976 through 2022 waves of [Monitoring the Future (MTF) Public-Use Cross-Sectional Datasets](https://www.icpsr.umich.edu/web/ICPSR/series/35), an annual survey nationally representative of American 12th-grade students
 
-[findings]
+Additional details are available in the [online supplement](https://jrpepin.github.io/MTF_Marriage/Supplementary%20Material.html) and data access and replication code are available at: <https://github.com/jrpepin/MTF_Marriage>.
 
+\[findings\]
 
 ```{r setup}
 #| echo: false
@@ -63,6 +62,6 @@ ptext
 
 ```
 
-[more findings]
+\[more findings\]
 
-# References 
+# References
