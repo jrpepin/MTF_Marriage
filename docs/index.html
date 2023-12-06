@@ -22,7 +22,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -112,7 +131,7 @@ ul.task-list li input[type="checkbox"] {
 <p>marriage, attitudes, adolescents, visualization</p>
 <hr>
 <p>[motivation paragraph]</p>
-<p>We used data from the 1976 through 2022 waves of <a href="https://www.icpsr.umich.edu/web/ICPSR/series/35">Monitoring the Future (MTF) Public-Use Cross-Sectional Datasets</a>, an annual survey nationally representative of American 12th-grade students [<span class="citation" data-cites="miech2022MonitoringFutureContinuing">(<a href="#ref-miech2022MonitoringFutureContinuing" role="doc-biblioref"><strong>miech2022MonitoringFutureContinuing?</strong></a>)</span>].</p>
+<p>We used data from the 1976 through 2022 waves of <a href="https://www.icpsr.umich.edu/web/ICPSR/series/35">Monitoring the Future (MTF) Public-Use Cross-Sectional Datasets</a>, an annual survey nationally representative of American 12th-grade students <span class="citation" data-cites="miech2022MonitoringFutureContinuing">(<a href="#ref-miech2022MonitoringFutureContinuing" role="doc-biblioref">Miech et al., n.d.</a>)</span>.</p>
 <p>Additional details are available in the <a href="https://jrpepin.github.io/MTF_Marriage/Supplementary%20Material.html">online supplement</a> and data access and replication code are available at: <a href="https://github.com/jrpepin/MTF_Marriage" class="uri">https://github.com/jrpepin/MTF_Marriage</a>.</p>
 <p>[findings]</p>
 <div class="cell" data-tbl-cap="">
@@ -124,12 +143,17 @@ ul.task-list li input[type="checkbox"] {
 </section>
 </section>
 <section id="references" class="level1">
-<h1>References</h1>
+
+
 
 
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-miech2022MonitoringFutureContinuing" class="csl-entry" role="listitem">
+Miech, Richard A., Lloyd D. Johnston, Jerald G. Bachman, Patrick M. O’Malley, John E. Schulenberg, and Megan E. Patrick. n.d. <span>“Monitoring the Future: A Continuing Study of American Youth (12th-Grade Survey), (ICPSR 38882).”</span> https://doi.org/<a href="https://doi.org/10.3886/ICPSR38882.v1">https://doi.org/10.3886/ICPSR38882.v1</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
