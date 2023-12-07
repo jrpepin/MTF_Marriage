@@ -14,16 +14,17 @@ load(paste0(dataDir, "/mtf_form2.Rda"))
 
 ## Load the data and create a new df containing only the variables of interest.  
 data <- select(mtf_V2, V5, ARCHIVE_WT, V1, V13, TABLET,     # Survey variables
-               V2239,                                       # Project specific
+               V2239, V2312,                                # Project specific
                V2151, V2150, V2164,                         # Demographic (V2165 - momemp ! 2022)
                V2169, V2155, V2156)           
 
 ## Rename Variables
 data <- dplyr::rename(data,      
-                      wt7611 = V5,       wt1222 = ARCHIVE_WT,  getmar   = V2239,
+                      wt7611 = V5,       wt1222 = ARCHIVE_WT,  
+                      getmar   = V2239,  gdsp   = V2312,
                       raceeth  = V2151,  year   = V1,          region   = V13,
                       gender   = V2150,  momed  = V2164,       religion = V2169,
-                      father = V2155,    mother   = V2156)
+                      father = V2155,    mother = V2156)
 
 ## Sample size
 count(data)
@@ -108,6 +109,14 @@ data <- data %>%
       mar3     == "Getting married"      ~ 1,
       mar3     == "Not getting married"  |
       mar3     == "I have no idea"       ~ 0),
+  # Good spouse
+  goodsp = fct_case_when(
+    gdsp == 5 | gdsp == "VRY GOOD" | gdsp == "Very good"  | gdsp == "VRY GOOD:(5)"                           ~ "Very good",
+    gdsp == 4 | gdsp == "GOOD"     | gdsp == "Good"       | gdsp == "GOOD:(4)"                               ~ "Good",
+    gdsp == 3 | gdsp == "FRLY GD"  | gdsp == "Fairly good"| gdsp == "FRLY GD:(3)"  | gdsp == "FAIR GOOD:(3)" ~ "Fairly good",
+    gdsp == 2 | gdsp == "NOT GOOD" | gdsp == "Not so good"| gdsp == "NOT GOOD:(2)"                           ~ "Not so good",
+    gdsp == 1 | gdsp == "POOR"     | gdsp == "Poor"       | gdsp == "POOR:(1)"                               ~ "Poor",
+    TRUE                                                                                                     ~  NA_character_),
   # tablet -- only avail. for 2019
     tablet = fct_case_when(
       TABLET == "TABLET:(1)" & year == 2019 ~ "Tablet",
@@ -169,9 +178,8 @@ data <- data %>%
       region == "NORTH CENTRL:(2)" | region == "NORTH CENTRAL:(2)"                                                ~ "Midwest",
       region == 3 | region == "S"  | region == "S:(3)"    | region == "SOUTH"         | region == "SOUTH:(3)"     ~ "South",
       region == 4 | region == "W"  | region == "W:(4)"    | region == "WEST"          | region == "WEST:(4)"      ~ "West")) %>%
-  select(svyweight, year, mar3, mardum,  
-         sex, race, racesex, momed, famstru, religion, region, tablet) %>%
-  drop_na(mar3) # exclude cases missing on DV
+  select(svyweight, year, mar3, mardum, goodsp, 
+         sex, race, racesex, momed, famstru, religion, region, tablet) 
   
 ## New Sample size
 count(data)
@@ -185,7 +193,10 @@ colSums(is.na(data))
 
 ## Create survey data 
 mtf_svy <- data %>%
-  drop_na(mar3) %>% # exclude cases missing on DV
+  # exclude cases missing on DVs
+  drop_na(mar3) %>% 
+  drop_na(goodsp) %>%
+  # weight data
   as_survey_design(id = 1,
                    weights = svyweight)
 
@@ -194,6 +205,7 @@ tabA <- mtf_svy %>%
   select(c(-svyweight, -year, -mardum, -racesex)) %>%
   tbl_svysummary(
     label = list(mar3     ~ "Marriage expectations",
+                 goodsp   ~ "Good as a spouse",
                  sex      ~ "Gender",
                  race     ~ "Race",
                  momed    ~ "Mothers' education",

@@ -13,227 +13,137 @@
 
 
 # Define color palette ---------------------------------------------------------
-mar3_palette = c("#18BC9C", "#E74C3C", "#3498DB")
+mar3_palette = c( "#18BC9C","#F39C12", "#E74C3C")
 
-c_palette <- c("#6f42c1", "#F39C12")
-
+goodsp_palette <- c("#18BC9C","#3498DB", "#6f42c1","#F39C12","#E74C3C")
 
 # CREATE FIGURE DATA -----------------------------------------------------------
 
-## TRENDS
-### ALL
-df0 <- mtf_svy %>%
-  group_by(year, mar3) %>%
-  summarize(vals  = survey_mean(na.rm = TRUE, vartype = "ci")) %>% # create summary proportions
-  mutate(vals     = round_percent(vals)/100, # round with preserving to 100%
-         vals_low = round_percent(vals_low)/100, 
-         vals_upp = round_percent(vals_upp)/100)
-
-### GENDER
+##GOOD SP
 df1 <- mtf_svy %>%
   drop_na(sex) %>% # remove cases w/ missing sex
-  group_by(year, sex, mar3) %>%
-  summarize(vals  = survey_mean(na.rm = TRUE, vartype = "ci")) %>% # create summary proportions
-  filter(mar3 == "Getting married") # only look at getmar
+  group_by(year, sex, goodsp) %>%
+  summarize(vals  = survey_mean(na.rm = TRUE, vartype = "ci")) # create summary proportions
 
-### RACE
+
+## GETMAR
 df2 <- mtf_svy %>%
-  drop_na(race) %>% # remove cases w/ missing race
-  group_by(year, race, mar3) %>%
-  summarize(vals  = survey_mean(na.rm = TRUE, vartype = "ci")) %>% # create summary proportions
-  filter(mar3 == "Getting married") # avoiding negative vals_low for 2020 Black
-
-### MOTHERS' EDUC
-df3 <- mtf_svy %>%
-  drop_na(momed) %>% # remove cases w/ missing mothers' educ.
-  group_by(year, momed, mar3) %>%
-  summarize(vals  = survey_mean(na.rm = TRUE, vartype = "ci")) %>% # create summary proportions
-  filter(mar3 == "Getting married") # avoiding negative vals_low for 2020 Black
-
-#### Combine dfs
-df1$cat    <- "Gender" 
-df2$cat    <- "Race" 
-df3$cat    <- "Mothers' education" 
-
-colnames(df1)[colnames(df1)=="sex"]   <- "demo"
-colnames(df2)[colnames(df2)=="race"]  <- "demo"
-colnames(df3)[colnames(df3)=="momed"] <- "demo"
-
-df4 <- rbind(df1, df2, df3)
-
-df4$cat <- factor(df4$cat, levels = c("Gender", "Race", 
-                                      "Mothers' education"), ordered = FALSE)
+  drop_na(sex) %>% # remove cases w/ missing sex
+  group_by(year, sex, mar3) %>%
+  summarize(vals  = survey_mean(na.rm = TRUE, vartype = "ci")) # create summary proportions
 
 ## Point Change dfs
-
-### ALL
-df_pc0 <- df0 %>%
-  filter(year == 1976 | year == 2022) %>%
-  pivot_wider(names_from = year, values_from = c(vals, vals_low, vals_upp)) %>%
-  mutate(pct_chg = vals_2022 - vals_1976,
-         label   = scales::percent(pct_chg %>% round(2)))
-
-### GENDER
-df_pc1 <- df1 %>%
-  filter(year == 1976 | year == 2022) %>%
-  pivot_wider(id_cols     = demo, 
-              names_from  = year, 
-              values_from = c(vals, vals_low, vals_upp)) %>%
-  mutate(pct_chg = vals_2022 - vals_1976,
-         label   = scales::percent(pct_chg %>% round(2)))
-
-### RACE
 df_pc2 <- df2 %>%
   filter(year == 1976 | year == 2022) %>%
-  pivot_wider(id_cols     = demo, 
+  pivot_wider(id_cols     = c(sex, mar3), 
               names_from  = year, 
               values_from = c(vals, vals_low, vals_upp)) %>%
   mutate(pct_chg = vals_2022 - vals_1976,
          label   = scales::percent(pct_chg %>% round(2)))
-
-### MOTHERS' EDUC
-df_pc3 <- df3 %>%
-  filter(year == 1976 | year == 2022) %>%
-  pivot_wider(id_cols     = demo, 
-              names_from  = year, 
-              values_from = c(vals, vals_low, vals_upp)) %>%
-  mutate(pct_chg = vals_2022 - vals_1976,
-         label   = scales::percent(pct_chg %>% round(2)))
-
-#### Combine dfs
-df_pc1$cat    <- "Gender" 
-df_pc2$cat    <- "Race" 
-df_pc3$cat    <- "Mothers' education" 
-
-df_pc4 <- rbind(df_pc1, df_pc2, df_pc3)
-
-df_pc4$cat <- factor(df_pc4$cat, levels = c("Gender", "Race", 
-                                            "Mothers' education"), ordered = FALSE)
 
 # VISUALIZE ------------------------------------------------------------------
-## Prep the data for plotting
-
-### ALL
-p1 <- df0 %>%
-  ggplot(aes(x = year, y = vals, color = mar3, ymin = vals_low, ymax = vals_upp)) +
-  stat_smooth(method = "lm", size = .5, fill = "grey80") +
-  geom_pointrange(aes(shape=mar3, alpha = .5)) +
-  scale_y_continuous(labels = scales::percent_format(accuracy = 1), limits = c(0, 1)) +
-  scale_color_manual(values = c(mar3_palette)) +
+### GOOD SP
+p1 <- df1 %>%
+  ggplot(aes(x = year, y = vals, color = goodsp, shape = goodsp, ymin = vals_low, ymax = vals_upp)) +
+  geom_smooth(method = loess, fill = "grey90", size = .75) +
+  geom_point(aes(alpha = .9), show.legend = FALSE) +
+  facet_wrap("sex")  +
   theme_minimal() +
-  theme(strip.text.x        = element_text(face = "bold"),
-        axis.title.y        = element_blank(),
-        panel.grid.minor    = element_blank(),
-        panel.grid.major    = element_blank(),
-        plot.caption        = element_text(color = "grey70", face = "italic"),
-        legend.position     = "none",
-        plot.title.position = "plot") +
-  geom_hline(yintercept=.5, color = "grey90") +
-  labs( x        = " ", 
-        y        = " ", 
-        title    = " U.S. twelfth-graders marriage expectations",
-        subtitle = " Panel A. % who think they will _______")
-
-p1
-
-
-### ALL DEMO
-p2 <- df4 %>%
-  ggplot(aes(x = year, y = vals, color = demo, ymin = vals_low, ymax = vals_upp)) +
-  stat_smooth(method = "lm", size = .5, fill = "grey80") +
-  geom_pointrange(aes(alpha = .9)) +
-  facet_wrap("cat", ncol = 1)  +
   scale_y_continuous(labels = scales::percent_format(accuracy = 1), 
-                     limits = c(.4, 1), 
-                     breaks = c(.5, .75, 1)) +
-  scale_color_manual(values = c(c_palette, 
-                                c_palette, 
-                                c_palette)) +
-  theme_minimal() +
-  theme(strip.text          = element_text(hjust = 0),
-        strip.text.x        = element_text(face = "italic"),
+                     limits = c(0, 1), 
+                     breaks = c(.5)) +
+  scale_x_continuous(breaks = c(1976, 2022)) +
+  theme(strip.text.x        = element_text(face = "bold.italic", size = 10, hjust = 0),
         axis.title.y        = element_blank(),
+        panel.spacing       = unit(2, "lines"),
         panel.grid.minor    = element_blank(),
         panel.grid.major    = element_blank(),
         plot.caption        = element_text(color = "grey70", face = "italic"),
         legend.position     = "none",
         plot.title.position = "plot",
-        plot.subtitle       = element_markdown()) +
-  geom_hline(yintercept=.5, color = "grey90") +
+        plot.margin = unit(c(0.25, 0.5, 0.05, 0.25), "inches")) +
+  geom_hline(yintercept=c(0, .5), color = "grey90") +
+  scale_color_manual(values = c(goodsp_palette)) +
   labs( x        = " ", 
         y        = " ",
-        subtitle = " Panel B. % of U.S. twelfth-graders who think they will <span style = 'color: #18BC9C;'>'get married'</span>")
+        title    = "Panel A.",
+        subtitle = "% who think they will be _______ as a spouse")
+p1
+
+### MAR3
+p2 <- df2 %>%
+  mutate(mar3 = factor(mar3, levels = c("Getting married", "I have no idea", "Not getting married"))) %>%
+  ggplot(aes(x = year, y = vals, color = mar3, ymin = vals_low, ymax = vals_upp)) +
+  geom_smooth(method = loess, fill = "grey80", size = .75) +
+  geom_point(aes(alpha = .9), show.legend = FALSE) +
+  facet_wrap("sex")  +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1), 
+                     limits = c(0, 1), 
+                     breaks = c()) +
+  scale_x_continuous(breaks = c(1976, 2022)) +
+  scale_color_manual(values = c(mar3_palette)) +
+  theme_minimal() +
+  theme(strip.text.x        = element_text(face = "bold.italic", size = 10, hjust = 0),
+        axis.title.y        = element_blank(),
+        panel.spacing       = unit(2, "lines"),
+        panel.grid.minor    = element_blank(),
+        panel.grid.major    = element_blank(),
+        legend.position     = "none",
+        plot.title.position = "plot",
+        plot.margin = unit(c(0.25, 0.2, 0.05, 0.75), "inches")) +
+  geom_hline(yintercept=c(0, .5), color = "grey90") +
+  labs( x        = " ", 
+        y        = " ",
+        title    = "Panel B.",
+        subtitle = "% who think they will _______")
 p2
 
-### Graphing % point change
-
-p3 <- df_pc0 %>%
-  ggplot(aes(x=mar3, y= pct_chg, fill = mar3)) +
-  geom_col(width = 0.5) +
+## Panel C. Change from 1976 to 2022
+p3 <- df_pc2 %>%
+  mutate(mar3 = factor(mar3, levels = c("Getting married", "I have no idea", "Not getting married"))) %>%
+  ggplot(aes(x = mar3, y = pct_chg, fill = mar3)) +
+  geom_col(aes(alpha = .9), width = 0.4) +
   geom_hline(yintercept = 0) +
+  facet_wrap("sex", ncol = 1) +
   geom_text(aes(label = label, vjust = -0.5)) +
-  scale_y_continuous(limits = c(-.10, .1)) +
-  scale_fill_manual(values  = c(mar3_palette)) +
+  scale_y_continuous(limits = c(-.11, 0.10)) +
   theme_minimal() +
-  theme(axis.text.x         = element_markdown(face = "bold", colour = c(mar3_palette)),
+  theme(strip.text.x        = element_text(face = "bold.italic", size = 10, hjust = 0),
+        strip.placement     = "outside",
+        panel.spacing       = unit(.5, "lines"),
+        axis.text.x         = element_markdown(colour = c(mar3_palette)),
         axis.text.y         = element_blank(), 
         axis.ticks.y        = element_blank(),
         panel.grid.minor    = element_blank(),
         panel.grid.major    = element_blank(),
-        plot.caption        = element_text(color = "grey70", face = "italic"),
-        legend.position     = "none") +
+        plot.title.position = "plot",
+        legend.position     = "none",
+        plot.margin = unit(c(0.25, 0.25, 0.05, 0.2), "inches")) +
   scale_x_discrete(position = "top",
-                   labels=c("Getting married" = "Get\nmarried", 
-                            "Not getting married" = "Not get\nmarried",
-                            "I have no idea" = "I have\nno idea")) +
-  labs( x        = " ", 
-        y        = " ", 
-        title    = "Percentage point change",
-        subtitle = "1976 - 2022")
-p3
-
-p4 <- df_pc4 %>%
-  ggplot(aes(x = demo, y = pct_chg, fill = demo)) +
-  geom_col(aes(alpha = .9), width = 0.3) +
-  geom_hline(yintercept = 0) +
-  facet_wrap("cat", ncol = 1, scales = "free_x") +
-  geom_text(aes(label = label, vjust = -0.5)) +
-  scale_y_continuous(limits = c(-.15, 0.05)) +
-  theme_minimal() +
-  scale_fill_manual(values  = c(c_palette, 
-                                c_palette, 
-                                c_palette)) +
-  theme(strip.text.x          = element_blank(),
-        axis.text.x           = element_markdown(colour = c(c_palette)),
-        axis.text.y           = element_blank(), 
-        axis.ticks.y          = element_blank(),
-        panel.grid.minor      = element_blank(),
-        panel.grid.major      = element_blank(),
-        legend.position       = "none") +
-  scale_x_discrete(position   = "top",
-                   labels     = c("Men"   = "Men", "Women" = "Women",
-                                  "White" = "White", "Black" = "Black",
-                                  "No college degree" = "No college\ndegree",
-                                  "Completed college" = "College\ndegree")) +
-  labs( title    = " ",
+                   labels   = c("Getting married"     = "Get\nmarried", 
+                                  "I have no idea"      = "Has\nno idea",
+                                  "Not getting married" = "Not get\nmarried")) +
+  scale_fill_manual(values = c(mar3_palette)) +
+  labs( title    = "Panel C.",
+        subtitle = "Percentage point change\n1976 - 2022",
         x        = " ", 
         y        = " ",
         caption  = " ")
-p4
+p3
 
 ### Put it all together
-p <- ggarrange(p1, p3, p2, p4,
-               ncol = 2, nrow = 2, heights = c(1, 2), widths = c(1.75,1))
+p <- ggarrange(p1, p2, p3,
+              ncol = 3, nrow = 1, widths = c(1,1, .65))
 p
 
 ptext <- annotate_figure(p, 
                 bottom = text_grob("  Figure 1. Trends in U.S. twelfth-graders marriage expectations
   Source: Data are from the Monitoring the Future Surveys (U.S.), 1976-2022.
   Note: Percentages are weighted to be nationally representative of U.S. high school seniors.
-  Additional details about data access, variable construction, and chi-squared tests between survey years are
-  available at: https://github.com/jrpepin/MTF_Marriage.
+  Additional details about data access, variable construction, and chi-squared tests between survey years are available at: 
+  https://github.com/jrpepin/MTF_Marriage.
   ", 
                 hjust = 0, x = 0, size = 9))
 ptext
 
-ggsave("marfig.png", ptext, width = 6.5, height = 8.5, dpi = 300, bg = 'white')
+ggsave("marfig.png", ptext, width = 9, height = 6.5, dpi = 300, bg = 'white')
