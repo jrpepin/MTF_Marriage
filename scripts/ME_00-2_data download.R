@@ -6,6 +6,10 @@
 ## This script only needs to be run the first time to download the data.
 ## Users should run ME_00-1_setup and packages.R before running this script.
 
+# if (!require(remotes)) install.packages("remotes")   # used to download the icpsrdata package
+# remotes::install_github("fsolt/icpsrdata")           # download ICPSR data
+
+
 # Download the data ------------------------------------------------------------
 
 icpsr_download(file_id = c(  7927,  7928,  7929,  7930,

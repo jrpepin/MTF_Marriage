@@ -90,6 +90,14 @@ fct_case_when <- function(...) {
 
 data <- data %>%
   mutate(
+  # Good spouse
+    goodsp = fct_case_when(
+      gdsp == 5 | gdsp == "VRY GOOD" | gdsp == "Very good"  | gdsp == "VRY GOOD:(5)"                           ~ "Very good",
+      gdsp == 4 | gdsp == "GOOD"     | gdsp == "Good"       | gdsp == "GOOD:(4)"                               ~ "Good",
+      gdsp == 3 | gdsp == "FRLY GD"  | gdsp == "Fairly good"| gdsp == "FRLY GD:(3)"  | gdsp == "FAIR GOOD:(3)" ~ "Fairly good",
+      gdsp == 2 | gdsp == "NOT GOOD" | gdsp == "Not so good"| gdsp == "NOT GOOD:(2)"                           ~ "Not so good",
+      gdsp == 1 | gdsp == "POOR"     | gdsp == "Poor"       | gdsp == "POOR:(1)"                               ~ "Poor",
+      TRUE                                                                                                     ~  NA_character_),
   # Get married
     getmar = fct_case_when(
       getmar == 3 | getmar == "MARRY"    | getmar == "MARRY:(3)"    | getmar == "Getting married"     | getmar == "MARRIED:(3)"            ~ "GETTING MARRIED",
@@ -109,14 +117,6 @@ data <- data %>%
       mar3     == "Getting married"      ~ 1,
       mar3     == "Not getting married"  |
       mar3     == "I have no idea"       ~ 0),
-  # Good spouse
-  goodsp = fct_case_when(
-    gdsp == 5 | gdsp == "VRY GOOD" | gdsp == "Very good"  | gdsp == "VRY GOOD:(5)"                           ~ "Very good",
-    gdsp == 4 | gdsp == "GOOD"     | gdsp == "Good"       | gdsp == "GOOD:(4)"                               ~ "Good",
-    gdsp == 3 | gdsp == "FRLY GD"  | gdsp == "Fairly good"| gdsp == "FRLY GD:(3)"  | gdsp == "FAIR GOOD:(3)" ~ "Fairly good",
-    gdsp == 2 | gdsp == "NOT GOOD" | gdsp == "Not so good"| gdsp == "NOT GOOD:(2)"                           ~ "Not so good",
-    gdsp == 1 | gdsp == "POOR"     | gdsp == "Poor"       | gdsp == "POOR:(1)"                               ~ "Poor",
-    TRUE                                                                                                     ~  NA_character_),
   # tablet -- only avail. for 2019
     tablet = fct_case_when(
       TABLET == "TABLET:(1)" & year == 2019 ~ "Tablet",

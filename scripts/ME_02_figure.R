@@ -13,9 +13,9 @@
 
 
 # Define color palette ---------------------------------------------------------
-mar3_palette = c( "#18BC9C","#F39C12", "#E74C3C")
+goodsp_palette <- c("#18BC9C","#3498DB", "#6f42c1","#E74C3C", "#F39C12")
 
-goodsp_palette <- c("#18BC9C","#3498DB", "#6f42c1","#F39C12","#E74C3C")
+mar3_palette = c( "#18BC9C","#3498DB", "#E74C3C")
 
 # CREATE FIGURE DATA -----------------------------------------------------------
 
@@ -142,8 +142,18 @@ ptext <- annotate_figure(p,
   Note: Percentages are weighted to be nationally representative of U.S. high school seniors.
   Additional details about data access, variable construction, and chi-squared tests between survey years are available at: 
   https://github.com/jrpepin/MTF_Marriage.
-  ", 
-                hjust = 0, x = 0, size = 9))
-ptext
+  ", hjust = 0, x = 0, size = 9))
 
-ggsave("marfig.png", ptext, width = 9, height = 6.5, dpi = 300, bg = 'white')
+plbl <- ptext +
+  annotate("text", x = .33, y = .54, label = "very good",        size = 8/.pt, fontface =2, hjust = 0, color = "#18BC9C") +
+  annotate("text", x = .33, y = .43, label = "good",             size = 8/.pt, fontface =2, hjust = 0, color = "#3498DB") +
+  annotate("text", x = .33, y = .35, label = "fairly good",      size = 8/.pt, fontface =2, hjust = 0, color = "#6f42c1") +
+  annotate("text", x = .33, y = .29, label = "not so good",      size = 8/.pt, fontface =2, hjust = 0, color = "#E74C3C") +
+  annotate("text", x = .33, y = .27, label = "poor",             size = 8/.pt, fontface =2, hjust = 0, color = "#F39C12") +
+  annotate("text", x = .57, y = .64, label = "get\nmarried",     size = 8/.pt, fontface =2, hjust = 0, color = "#18BC9C") +
+  annotate("text", x = .57, y = .42, label = "has\nno idea",     size = 8/.pt, fontface =2, hjust = 0, color = "#3498DB") +
+  annotate("text", x = .57, y = .33, label = "not get\nmarried", size = 8/.pt, fontface =2, hjust = 0, color = "#E74C3C")
+
+plbl
+
+ggsave("marfig.png", plbl, width = 9, height = 6.5, dpi = 300, bg = 'white')

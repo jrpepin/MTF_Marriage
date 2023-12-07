@@ -10,10 +10,8 @@
 ## WARNING: Remove the leading # to install packages below the first time. 
 ## Change filepaths below once
 
-# if (!require(remotes)) install.packages("remotes") 
 # if (!require(devtools)) install.packages("devtools") 
-# remotes::install_github("fsolt/icpsrdata")                      # download ICPSR data
-# install.packages("pacman")                                      # Install pacman package if not installed
+# install.packages("pacman")       # Install pacman package if not installed
 
 # Installs and loads packages automatically
 library("pacman")                  # Load pacman package
