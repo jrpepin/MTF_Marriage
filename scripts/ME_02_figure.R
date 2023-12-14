@@ -142,7 +142,7 @@ ptext <- annotate_figure(p,
                 bottom = text_grob("  Figure 1. Trends in U.S. twelfth-graders marriage expectations
   Source: Data are from the Monitoring the Future Surveys (U.S.), 1976-2022.
   Note: Percentages are weighted to be nationally representative of U.S. high school seniors.
-  Additional details about data access, variable construction, and chi-squared tests between survey years are available at: 
+  Additional details about data access and variable construction are available at: 
   https://github.com/jrpepin/MTF_Marriage.
   ", hjust = 0, x = 0, size = 9))
 
