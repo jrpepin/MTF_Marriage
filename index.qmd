@@ -17,7 +17,7 @@ bibliography: references.bib
 
 # Abstract
 
-Using [Monitoring the Future (MTF) Public-Use Cross-Sectional Datasets (1976-2022)](https://www.icpsr.umich.edu/web/ICPSR/series/35), this visualization presents U.S. twelfth graders marriage expectations. It shows declining optimism among young people in their belief that they will be a 'very good spouse' and that they will eventually get married. declines starting in XXXX and most pronounced amongst young women. 
+Using [Monitoring the Future (MTF) Public-Use Cross-Sectional Datasets (1976-2022)](https://www.icpsr.umich.edu/web/ICPSR/series/35), this visualization presents U.S. twelfth graders marriage expectations. It shows declining optimism among young people in their belief that they will be a 'very good spouse' and that they will eventually get married. declines starting in XXXX, especially among young women.
 
 ### Keywords
 
@@ -27,9 +27,7 @@ marriage, attitudes, adolescents, gender, visualization
 
 \[motivation paragraph\]
 
-We used data from the 1976 through 2022 waves of [Monitoring the Future (MTF) Public-Use Cross-Sectional Datasets](https://www.icpsr.umich.edu/web/ICPSR/series/35), an annual survey nationally representative of American 12th-grade students [@miech2022MonitoringFutureContinuing].
-
-Additional details are available in the [online supplement](https://jrpepin.github.io/MTF_Marriage/Supplementary%20Material.html) and data access and replication code are available at: <https://github.com/jrpepin/MTF_Marriage>.
+We used data from the 1976 through 2022 waves of [Monitoring the Future (MTF) Public-Use Cross-Sectional Datasets](https://www.icpsr.umich.edu/web/ICPSR/series/35), an annual survey nationally representative of American students, [@miech2022MonitoringFutureContinuing] to examine young people's marital expectations. Figure 1 presents trends in U.S. twelfth graders' assessment of how good of a spouse they expect to be (panel A), whether they think they will get married (panel B), and the percentage point change in this belief over the last 10 years (panel C). Additional details are available in the [online supplement](https://jrpepin.github.io/MTF_Marriage/Supplementary%20Material.html) and data access and replication code are available at: <https://github.com/jrpepin/MTF_Marriage>.
 
 \[findings\]
 
@@ -54,11 +52,11 @@ Additional details are available in the [online supplement](https://jrpepin.gith
 #| file: scripts/ME_02_figure.R
 ```
 
-```{r figure-02, fig.width=6.5, fig.height=8}
+```{r figure-02, fig.width=9, fig.height=6.5}
 #| echo: false
 #| tbl-cap: ""
 
-ptext
+plbl
 
 ```
 
