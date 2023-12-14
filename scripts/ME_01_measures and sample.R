@@ -229,7 +229,7 @@ tabA <- mtf_svy %>%
   modify_header(
     label = '**Variable**',
     stat_0 = '**N (unweighted) = 102115**') %>%
-  modify_caption("Weighted summary statistics of the pooled analytic sample") %>%
+  modify_caption("Weighted statistics of the pooled analytic sample") %>%
   as_flex_table() 
 #  add_footer_lines("notes")
 

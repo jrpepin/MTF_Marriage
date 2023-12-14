@@ -40,6 +40,9 @@ df_pc2 <- df2 %>%
   mutate(pct_chg = vals_2022 - vals_2012,
          label   = scales::percent(pct_chg %>% round(2)))
 
+names <- list('goodsp' = df1, 'mar3' = df2, 'mar3_change' = df_pc2)
+write.xlsx(names, file = file.path(outDir, "figdata.xlsx"))
+
 # VISUALIZE ------------------------------------------------------------------
 ### GOOD SP
 p1 <- df1 %>%

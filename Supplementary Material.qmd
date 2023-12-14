@@ -3,8 +3,8 @@ title: "Supplementary Material"
 author: "Joanna R. Pepin and Philip N. Cohen"
 date: today
 ---
-  
-<br> 
+
+<br>
 
 Full replication code for data access, variable construction, cell sizes and distribution, and data visualization creation is available in a Github repository: <https://github.com/jrpepin/MTF_Marriage>.
 
@@ -38,26 +38,27 @@ Respondents were told to guess how well they might do in several different situa
 
 The second marital expectation used in this data visualization asked respondents "Which do you think you are most likely to choose in the long run?" The answer choices consisted of: (1) Not getting married, (2) I have no idea, (3) getting married, or (8) I am already married. The number of students who reported they were already married was tiny (e.g., \< 1% in 2022), so we recoded these students as "getting married."
 
-## *SEX*
+## *SEX (V2150)*
 
 We used a dichotomous indicator of sex to distinguish young men and young women. Respondents were asked "What is your sex?" Although newer survey years include options "other" and "prefer not to answer", for consistency across survey years and due to sample sizes, we restrict the analyses to respondents who reported "male" or "female."
 
 # Sample ----------------------------------------------------------
 
-A multi-stage random sampling procedure provides a nationally representative sample of U.S. twelfth grade students, who are surveyed each spring. This data visualization is based on a sample of 102,115 U.S. twelfth graders, who answered both marital expectations questions, and who identified their sex as male or female. The data visualization uses the provided sampling weights assigned to each respondent to account for selection probabilities. 
+A multi-stage random sampling procedure provides a nationally representative sample of U.S. twelfth grade students, who are surveyed each spring. This data visualization is based on a sample of 102,115 U.S. twelfth graders, who answered both marital expectations questions, and who identified their sex as male or female. The data visualization uses the provided sampling weights assigned to each respondent to account for selection probabilities.
 
 In addition to our two dependent variables and key independent variable, MTF also includes a number of other demographic variables. Our aim is to get an overall impression of attitude trends, so we do not adjust models for these variables but provide them two demographic information in the supplemental table below.
 
 ```{r table01, echo=FALSE}
 #| echo: false
-#| tbl-cap: "Summary statistics of the pooled (weighted) analytic sample"
+#| tbl-cap: "Weighted statistics of the pooled analytic sample"
 knit_print(tabA)
 
 ```
-  
-# Additional Notes -------------------------------------------------------------
+
+# Additional Notes ---------------------------------------------------------------------
 
 ## Sample Sizes
+
 Between 1976 and 2019, the number of students in our sample ranged from 1626 to 3135. In 2020, survey collection was ended due to the COVID-19 pandemic, resulting in a sample size (n = 502) about 25% the size of previous surveys. Starting in 2021, efforts to shorten the length of the survey meant students were randomly assigned blocks of questions (in addition to randomly being assigned 1 of 6 forms). Thus, sample sizes for 2021 (n = 537) and 2022 (n = 576) were also comparably smaller than prior year).
 
 ```{r counts}
@@ -68,7 +69,7 @@ kable(counts %>%  arrange(n), "html", booktabs = T) %>%
     scroll_box(height = "200px")
 
 ```
-  
+
 ## Survey Mode
-In 2019, schools were randomly assigned paper or tablet surveys, whereas prior years consisted entirely of paper surveys. 
-Students surveyed in 2020 all completed the surveys on tablets. In 2021 and 2022, students completed the surveys via the web on their personal or school-provided device. Given that the decline in the trends started before the survey mode changes, these mode adjustments cannot fully account for the findings.
+
+In 2019, schools were randomly assigned paper or tablet surveys, whereas prior years consisted entirely of paper surveys. Students surveyed in 2020 all completed the surveys on tablets. In 2021 and 2022, students completed the surveys via the web on their personal or school-provided device. Given that the decline in the trends started before the survey mode changes, these mode adjustments cannot fully account for the findings.

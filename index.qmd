@@ -17,11 +17,11 @@ bibliography: references.bib
 
 # Abstract
 
-Using [Monitoring the Future (MTF) Public-Use Cross-Sectional Datasets (1976-2022)](https://www.icpsr.umich.edu/web/ICPSR/series/35), this visualization presents U.S. twelfth graders marriage expectations by gender. It shows...
+Using [Monitoring the Future (MTF) Public-Use Cross-Sectional Datasets (1976-2022)](https://www.icpsr.umich.edu/web/ICPSR/series/35), this visualization presents U.S. twelfth graders marriage expectations. It shows declining optimism among young people in their belief that they will be a 'very good spouse' and that they will eventually get married. declines starting in XXXX and most pronounced amongst young women. 
 
 ### Keywords
 
-marriage, attitudes, adolescents, visualization
+marriage, attitudes, adolescents, gender, visualization
 
 ------------------------------------------------------------------------
 
