@@ -17,7 +17,7 @@ bibliography: references.bib
 
 # Abstract
 
-Using [Monitoring the Future (MTF) Public-Use Cross-Sectional Datasets (1976-2022)](https://www.icpsr.umich.edu/web/ICPSR/series/35), this visualization presents U.S. twelfth graders marriage expectations by gender, racial group, and mothers' education. It shows...
+Using [Monitoring the Future (MTF) Public-Use Cross-Sectional Datasets (1976-2022)](https://www.icpsr.umich.edu/web/ICPSR/series/35), this visualization presents U.S. twelfth graders marriage expectations by gender. It shows...
 
 ### Keywords
 

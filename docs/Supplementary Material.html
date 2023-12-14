@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Joanna R. Pepin and Philip N. Cohen">
-<meta name="dcterms.date" content="2023-12-04">
+<meta name="dcterms.date" content="2023-12-14">
 
 <title>Supplementary Material</title>
 <style>
@@ -60,8 +60,11 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+
 <link href="site_libs/tabwid-1.1.3/tabwid.css" rel="stylesheet">
 <script src="site_libs/tabwid-1.1.3/tabwid.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 
 
 </head>
@@ -96,7 +99,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">December 4, 2023</p>
+      <p class="date">December 14, 2023</p>
     </div>
   </div>
   
@@ -106,38 +109,256 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Full replication code for data access, variable construction, cell sizes and distribution, chi-squared tests, and data visualization creation is available in a Github repository: <a href="https://github.com/jrpepin/MTF_Marriage" class="uri">https://github.com/jrpepin/MTF_Marriage</a>.</p>
+<p><br></p>
+<p>Full replication code for data access, variable construction, cell sizes and distribution, and data visualization creation is available in a Github repository: <a href="https://github.com/jrpepin/MTF_Marriage" class="uri">https://github.com/jrpepin/MTF_Marriage</a>.</p>
 <section id="data" class="level1">
 <h1>Data ————————————————————–</h1>
+<p>Data come from the 12th-grade student surveys from the <a href="https://monitoringthefuture.org/">Monitoring the Future (MTF) Public-Use Cross-Sectional Datasets (1976-2022)</a>. The National Institutes of Health funds the cross-sectional surveys through a series of grants from the National Institute on Drug Abuse. The National Addiction and HIV Data Archive Program provides the data to <a href="https://www.icpsr.umich.edu/web/ICPSR/series/35">ICPSR (study 35)</a> for public download.</p>
 </section>
 <section id="measures--" class="level1">
 <h1>Measures ——————————————————-</h1>
-<section id="marriage-expectations" class="level2">
-<h2 class="anchored" data-anchor-id="marriage-expectations"><em>Marriage expectations</em></h2>
+<p>Core questions are asked of all respondents and then specific questions appear on one of the five or six forms. This data visualization consists of variables which appeared on form 2 of the surveys.</p>
+<section id="how-gd-as-spouse-v2312" class="level2">
+<h2 class="anchored" data-anchor-id="how-gd-as-spouse-v2312"><em>HOW GD AS SPOUSE (V2312)</em></h2>
+<p>Respondents were told to guess how well they might do in several different situations and the asked them: “How good do you think you would be …?” The first situation, which we present in this data visualization, asks them to evaluate how good they think they will be: “as a husband or wife.” Possible responses included: (1) poor, (2) not so good, (3) fairly good, (4) good, and (5) very good. Some survey years also allowed (8) don’t know, but this choice was not available consistently across the survey years and instead coded as missing. Therefore, this analysis excluded the “don’t know” response choices from analyses.</p>
 </section>
-<section id="gender" class="level2">
-<h2 class="anchored" data-anchor-id="gender"><em>Gender</em></h2>
+<section id="think-will-marry-v2239" class="level2">
+<h2 class="anchored" data-anchor-id="think-will-marry-v2239"><em>THINK WILL MARRY (V2239)</em></h2>
+<p>The second marital expectation used in this data visualization asked respondents “Which do you think you are most likely to choose in the long run?” The answer choices consisted of: (1) Not getting married, (2) I have no idea, (3) getting married, or (8) I am already married. The number of students who reported they were already married was tiny (e.g., &lt; 1% in 2022), so we recoded these students as “getting married.”</p>
 </section>
-<section id="race" class="level2">
-<h2 class="anchored" data-anchor-id="race"><em>Race</em></h2>
-</section>
-<section id="mothers-education" class="level2">
-<h2 class="anchored" data-anchor-id="mothers-education"><em>Mothers’ education</em></h2>
+<section id="sex" class="level2">
+<h2 class="anchored" data-anchor-id="sex"><em>SEX</em></h2>
+<p>We used a dichotomous indicator of sex to distinguish young men and young women. Respondents were asked “What is your sex?” Although newer survey years include options “other” and “prefer not to answer”, for consistency across survey years and due to sample sizes, we restrict the analyses to respondents who reported “male” or “female.”</p>
 </section>
 </section>
 <section id="sample--" class="level1">
 <h1>Sample ———————————————————-</h1>
+<p>A multi-stage random sampling procedure provides a nationally representative sample of U.S. twelfth grade students, who are surveyed each spring. This data visualization is based on a sample of 102,115 U.S. twelfth graders, who answered both marital expectations questions, and who identified their sex as male or female. The data visualization uses the provided sampling weights assigned to each respondent to account for selection probabilities.</p>
+<p>In addition to our two dependent variables and key independent variable, MTF also includes a number of other demographic variables. Our aim is to get an overall impression of attitude trends, so we do not adjust models for these variables but provide them two demographic information in the supplemental table below.</p>
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="tabwid"><style>.cl-dece6b98{}.cl-dec24b24{font-family:'Arial';font-size:11pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-dec24b38{font-family:'Arial';font-size:6.6pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;position: relative;bottom:3.3pt;}.cl-dec24b39{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-dec83124{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2pt;padding-top:2pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-dec83142{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2pt;padding-top:2pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-dec8314c{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-dec8314d{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-dec83156{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:15pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-dec83160{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-dec84af6{width:2.569in;background-color:transparent;vertical-align: middle;border-bottom: 1pt solid rgba(0, 0, 0, 1.00);border-top: 1pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-dec84b0a{width:2.072in;background-color:transparent;vertical-align: middle;border-bottom: 1pt solid rgba(0, 0, 0, 1.00);border-top: 1pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-dec84b0b{width:2.569in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-dec84b14{width:2.072in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-dec84b15{width:2.569in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-dec84b1e{width:2.072in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-dec84b1f{width:2.569in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-dec84b28{width:2.072in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-dec84b29{width:2.569in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-dec84b32{width:2.072in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-dec84b3c{width:2.569in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-dec84b46{width:2.072in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-dec84b50{width:2.569in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-dec84b51{width:2.072in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-dec84b5a{width:2.569in;background-color:transparent;vertical-align: top;border-bottom: 1pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-dec84b5b{width:2.072in;background-color:transparent;vertical-align: top;border-bottom: 1pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-dec84b64{width:2.569in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-dec84b65{width:2.072in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-dece6b98"><caption><p>Summary statistics of the pooled (weighted) analytic sample</p></caption><thead><tr style="overflow-wrap:break-word;"><th class="cl-dec84af6"><p class="cl-dec83124"><span class="cl-dec24b24">Variable</span></p></th><th class="cl-dec84b0a"><p class="cl-dec83142"><span class="cl-dec24b24">N (unweighted) = 118966</span><span class="cl-dec24b38">1</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-dec84b0b"><p class="cl-dec8314c"><span class="cl-dec24b39">Marriage expectations</span></p></td><td class="cl-dec84b14"><p class="cl-dec8314d"><span class="cl-dec24b39"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-dec84b15"><p class="cl-dec83156"><span class="cl-dec24b39">Getting married</span></p></td><td class="cl-dec84b1e"><p class="cl-dec8314d"><span class="cl-dec24b39">92,900 (79%)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-dec84b15"><p class="cl-dec83156"><span class="cl-dec24b39">Not getting married</span></p></td><td class="cl-dec84b1e"><p class="cl-dec8314d"><span class="cl-dec24b39">5,495 (4.7%)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-dec84b15"><p class="cl-dec83156"><span class="cl-dec24b39">I have no idea</span></p></td><td class="cl-dec84b1e"><p class="cl-dec8314d"><span class="cl-dec24b39">19,749 (17%)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-dec84b1f"><p class="cl-dec8314c"><span class="cl-dec24b39">Gender</span></p></td><td class="cl-dec84b28"><p class="cl-dec8314d"><span class="cl-dec24b39"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-dec84b15"><p class="cl-dec83156"><span class="cl-dec24b39">Men</span></p></td><td class="cl-dec84b1e"><p class="cl-dec8314d"><span class="cl-dec24b39">55,164 (49%)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-dec84b15"><p class="cl-dec83156"><span class="cl-dec24b39">Women</span></p></td><td class="cl-dec84b1e"><p class="cl-dec8314d"><span class="cl-dec24b39">57,248 (51%)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-dec84b29"><p class="cl-dec83156"><span class="cl-dec24b39">Unknown</span></p></td><td class="cl-dec84b32"><p class="cl-dec8314d"><span class="cl-dec24b39">5,732</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-dec84b3c"><p class="cl-dec8314c"><span class="cl-dec24b39">Race</span></p></td><td class="cl-dec84b46"><p class="cl-dec8314d"><span class="cl-dec24b39"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-dec84b15"><p class="cl-dec83156"><span class="cl-dec24b39">White</span></p></td><td class="cl-dec84b1e"><p class="cl-dec8314d"><span class="cl-dec24b39">79,505 (85%)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-dec84b15"><p class="cl-dec83156"><span class="cl-dec24b39">Black</span></p></td><td class="cl-dec84b1e"><p class="cl-dec8314d"><span class="cl-dec24b39">13,619 (15%)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-dec84b29"><p class="cl-dec83156"><span class="cl-dec24b39">Unknown</span></p></td><td class="cl-dec84b32"><p class="cl-dec8314d"><span class="cl-dec24b39">25,020</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-dec84b3c"><p class="cl-dec8314c"><span class="cl-dec24b39">Mothers' education</span></p></td><td class="cl-dec84b46"><p class="cl-dec8314d"><span class="cl-dec24b39"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-dec84b15"><p class="cl-dec83156"><span class="cl-dec24b39">No college degree</span></p></td><td class="cl-dec84b1e"><p class="cl-dec8314d"><span class="cl-dec24b39">75,145 (68%)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-dec84b15"><p class="cl-dec83156"><span class="cl-dec24b39">Completed college</span></p></td><td class="cl-dec84b1e"><p class="cl-dec8314d"><span class="cl-dec24b39">35,166 (32%)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-dec84b29"><p class="cl-dec83156"><span class="cl-dec24b39">Unknown</span></p></td><td class="cl-dec84b32"><p class="cl-dec8314d"><span class="cl-dec24b39">7,833</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-dec84b0b"><p class="cl-dec8314c"><span class="cl-dec24b39">Family structure when growing up</span></p></td><td class="cl-dec84b14"><p class="cl-dec8314d"><span class="cl-dec24b39"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-dec84b15"><p class="cl-dec83156"><span class="cl-dec24b39">Both Mother &amp; Father</span></p></td><td class="cl-dec84b1e"><p class="cl-dec8314d"><span class="cl-dec24b39">81,729 (71%)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-dec84b50"><p class="cl-dec83156"><span class="cl-dec24b39">Mother Only</span></p></td><td class="cl-dec84b51"><p class="cl-dec8314d"><span class="cl-dec24b39">21,639 (19%)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-dec84b50"><p class="cl-dec83156"><span class="cl-dec24b39">Father Only</span></p></td><td class="cl-dec84b51"><p class="cl-dec8314d"><span class="cl-dec24b39">4,507 (3.9%)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-dec84b15"><p class="cl-dec83156"><span class="cl-dec24b39">Neither Mother/Father</span></p></td><td class="cl-dec84b1e"><p class="cl-dec8314d"><span class="cl-dec24b39">6,949 (6.1%)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-dec84b29"><p class="cl-dec83156"><span class="cl-dec24b39">Unknown</span></p></td><td class="cl-dec84b32"><p class="cl-dec8314d"><span class="cl-dec24b39">3,320</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-dec84b0b"><p class="cl-dec8314c"><span class="cl-dec24b39">Religiosity</span></p></td><td class="cl-dec84b14"><p class="cl-dec8314d"><span class="cl-dec24b39"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-dec84b15"><p class="cl-dec83156"><span class="cl-dec24b39">Never</span></p></td><td class="cl-dec84b1e"><p class="cl-dec8314d"><span class="cl-dec24b39">14,416 (14%)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-dec84b15"><p class="cl-dec83156"><span class="cl-dec24b39">Rarely</span></p></td><td class="cl-dec84b1e"><p class="cl-dec8314d"><span class="cl-dec24b39">36,123 (35%)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-dec84b15"><p class="cl-dec83156"><span class="cl-dec24b39">Once or twice a month</span></p></td><td class="cl-dec84b1e"><p class="cl-dec8314d"><span class="cl-dec24b39">17,682 (17%)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-dec84b15"><p class="cl-dec83156"><span class="cl-dec24b39">About once a week or more</span></p></td><td class="cl-dec84b1e"><p class="cl-dec8314d"><span class="cl-dec24b39">34,867 (34%)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-dec84b29"><p class="cl-dec83156"><span class="cl-dec24b39">Unknown</span></p></td><td class="cl-dec84b32"><p class="cl-dec8314d"><span class="cl-dec24b39">15,057</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-dec84b0b"><p class="cl-dec8314c"><span class="cl-dec24b39">Region</span></p></td><td class="cl-dec84b14"><p class="cl-dec8314d"><span class="cl-dec24b39"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-dec84b15"><p class="cl-dec83156"><span class="cl-dec24b39">Northeast</span></p></td><td class="cl-dec84b1e"><p class="cl-dec8314d"><span class="cl-dec24b39">24,094 (20%)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-dec84b15"><p class="cl-dec83156"><span class="cl-dec24b39">Midwest</span></p></td><td class="cl-dec84b1e"><p class="cl-dec8314d"><span class="cl-dec24b39">31,104 (26%)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-dec84b15"><p class="cl-dec83156"><span class="cl-dec24b39">South</span></p></td><td class="cl-dec84b1e"><p class="cl-dec8314d"><span class="cl-dec24b39">40,523 (34%)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-dec84b15"><p class="cl-dec83156"><span class="cl-dec24b39">West</span></p></td><td class="cl-dec84b1e"><p class="cl-dec8314d"><span class="cl-dec24b39">22,423 (19%)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-dec84b15"><p class="cl-dec8314c"><span class="cl-dec24b39">Survey mode (2019)</span></p></td><td class="cl-dec84b1e"><p class="cl-dec8314d"><span class="cl-dec24b39"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-dec84b15"><p class="cl-dec83156"><span class="cl-dec24b39">Tablet</span></p></td><td class="cl-dec84b1e"><p class="cl-dec8314d"><span class="cl-dec24b39">1,109 (52%)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-dec84b15"><p class="cl-dec83156"><span class="cl-dec24b39">Paper</span></p></td><td class="cl-dec84b1e"><p class="cl-dec8314d"><span class="cl-dec24b39">1,010 (48%)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-dec84b5a"><p class="cl-dec83156"><span class="cl-dec24b39">Unknown</span></p></td><td class="cl-dec84b5b"><p class="cl-dec8314d"><span class="cl-dec24b39">116,025</span></p></td></tr></tbody><tfoot><tr style="overflow-wrap:break-word;"><td colspan="2" class="cl-dec84b64"><p class="cl-dec83160"><span class="cl-dec24b38">1</span><span class="cl-dec24b39">n (%)</span></p></td></tr></tfoot></table></div>
+<div class="tabwid"><style>.cl-d177d5fc{}.cl-d16c74c8{font-family:'Arial';font-size:11pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-d16c74d2{font-family:'Arial';font-size:6.6pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;position: relative;bottom:3.3pt;}.cl-d16c74d3{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-d1704f8a{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2pt;padding-top:2pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-d1704f9e{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2pt;padding-top:2pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-d1704f9f{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-d1704fa8{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-d1704fa9{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:15pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-d1704fbc{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-d1706812{width:1.788in;background-color:transparent;vertical-align: middle;border-bottom: 1pt solid rgba(0, 0, 0, 1.00);border-top: 1pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d1706826{width:2.072in;background-color:transparent;vertical-align: middle;border-bottom: 1pt solid rgba(0, 0, 0, 1.00);border-top: 1pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d1706830{width:1.788in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d170683a{width:2.072in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d170683b{width:1.788in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d170684e{width:2.072in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d170684f{width:1.788in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d1706850{width:2.072in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d1706858{width:1.788in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d1706859{width:2.072in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d1706862{width:1.788in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d170686c{width:2.072in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d170686d{width:1.788in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d1706876{width:2.072in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d1706877{width:1.788in;background-color:transparent;vertical-align: top;border-bottom: 1pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d1706880{width:2.072in;background-color:transparent;vertical-align: top;border-bottom: 1pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d170688a{width:1.788in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d1706894{width:2.072in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-d177d5fc"><caption><p>Summary statistics of the pooled (weighted) analytic sample</p></caption><thead><tr style="overflow-wrap:break-word;"><th class="cl-d1706812"><p class="cl-d1704f8a"><span class="cl-d16c74c8">Variable</span></p></th><th class="cl-d1706826"><p class="cl-d1704f9e"><span class="cl-d16c74c8">N (unweighted) = 102115</span><span class="cl-d16c74d2">1</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-d1706830"><p class="cl-d1704f9f"><span class="cl-d16c74d3">Marriage expectations</span></p></td><td class="cl-d170683a"><p class="cl-d1704fa8"><span class="cl-d16c74d3"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-d170683b"><p class="cl-d1704fa9"><span class="cl-d16c74d3">Getting married</span></p></td><td class="cl-d170684e"><p class="cl-d1704fa8"><span class="cl-d16c74d3">82,457 (81%)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-d170683b"><p class="cl-d1704fa9"><span class="cl-d16c74d3">Not getting married</span></p></td><td class="cl-d170684e"><p class="cl-d1704fa8"><span class="cl-d16c74d3">4,305 (4.2%)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-d170683b"><p class="cl-d1704fa9"><span class="cl-d16c74d3">I have no idea</span></p></td><td class="cl-d170684e"><p class="cl-d1704fa8"><span class="cl-d16c74d3">15,059 (15%)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-d170684f"><p class="cl-d1704f9f"><span class="cl-d16c74d3">Good as a spouse</span></p></td><td class="cl-d1706850"><p class="cl-d1704fa8"><span class="cl-d16c74d3"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-d170683b"><p class="cl-d1704fa9"><span class="cl-d16c74d3">Very good</span></p></td><td class="cl-d170684e"><p class="cl-d1704fa8"><span class="cl-d16c74d3">54,175 (53%)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-d170683b"><p class="cl-d1704fa9"><span class="cl-d16c74d3">Good</span></p></td><td class="cl-d170684e"><p class="cl-d1704fa8"><span class="cl-d16c74d3">35,126 (34%)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-d170683b"><p class="cl-d1704fa9"><span class="cl-d16c74d3">Fairly good</span></p></td><td class="cl-d170684e"><p class="cl-d1704fa8"><span class="cl-d16c74d3">9,349 (9.2%)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-d170683b"><p class="cl-d1704fa9"><span class="cl-d16c74d3">Not so good</span></p></td><td class="cl-d170684e"><p class="cl-d1704fa8"><span class="cl-d16c74d3">1,782 (1.7%)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-d170683b"><p class="cl-d1704fa9"><span class="cl-d16c74d3">Poor</span></p></td><td class="cl-d170684e"><p class="cl-d1704fa8"><span class="cl-d16c74d3">1,389 (1.4%)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-d1706858"><p class="cl-d1704f9f"><span class="cl-d16c74d3">Gender</span></p></td><td class="cl-d1706859"><p class="cl-d1704fa8"><span class="cl-d16c74d3"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-d170683b"><p class="cl-d1704fa9"><span class="cl-d16c74d3">Men</span></p></td><td class="cl-d170684e"><p class="cl-d1704fa8"><span class="cl-d16c74d3">48,847 (48%)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-d170683b"><p class="cl-d1704fa9"><span class="cl-d16c74d3">Women</span></p></td><td class="cl-d170684e"><p class="cl-d1704fa8"><span class="cl-d16c74d3">52,975 (52%)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-d1706862"><p class="cl-d1704f9f"><span class="cl-d16c74d3">Race</span></p></td><td class="cl-d170686c"><p class="cl-d1704fa8"><span class="cl-d16c74d3"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-d170683b"><p class="cl-d1704fa9"><span class="cl-d16c74d3">White</span></p></td><td class="cl-d170684e"><p class="cl-d1704fa8"><span class="cl-d16c74d3">72,326 (87%)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-d170683b"><p class="cl-d1704fa9"><span class="cl-d16c74d3">Black</span></p></td><td class="cl-d170684e"><p class="cl-d1704fa8"><span class="cl-d16c74d3">11,015 (13%)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-d170686d"><p class="cl-d1704fa9"><span class="cl-d16c74d3">Unknown</span></p></td><td class="cl-d1706876"><p class="cl-d1704fa8"><span class="cl-d16c74d3">18,481</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-d1706862"><p class="cl-d1704f9f"><span class="cl-d16c74d3">Mothers' education</span></p></td><td class="cl-d170686c"><p class="cl-d1704fa8"><span class="cl-d16c74d3"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-d170683b"><p class="cl-d1704fa9"><span class="cl-d16c74d3">No college degree</span></p></td><td class="cl-d170684e"><p class="cl-d1704fa8"><span class="cl-d16c74d3">66,354 (68%)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-d170683b"><p class="cl-d1704fa9"><span class="cl-d16c74d3">Completed college</span></p></td><td class="cl-d170684e"><p class="cl-d1704fa8"><span class="cl-d16c74d3">31,647 (32%)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-d1706877"><p class="cl-d1704fa9"><span class="cl-d16c74d3">Unknown</span></p></td><td class="cl-d1706880"><p class="cl-d1704fa8"><span class="cl-d16c74d3">3,820</span></p></td></tr></tbody><tfoot><tr style="overflow-wrap:break-word;"><td colspan="2" class="cl-d170688a"><p class="cl-d1704fbc"><span class="cl-d16c74d2">1</span><span class="cl-d16c74d3">n (%)</span></p></td></tr></tfoot></table></div>
 </div>
 </div>
 </section>
-<section id="chi-squared-tests" class="level1">
-<h1>Chi-squared tests ———————————————</h1>
+<section id="additional-notes--" class="level1">
+<h1>Additional Notes ————————————————————-</h1>
+<section id="sample-sizes" class="level2">
+<h2 class="anchored" data-anchor-id="sample-sizes">Sample Sizes</h2>
+<p>Between 1976 and 2019, the number of students in our sample ranged from 1626 to 3135. In 2020, survey collection was ended due to the COVID-19 pandemic, resulting in a sample size (n = 502) about 25% the size of previous surveys. Starting in 2021, efforts to shorten the length of the survey meant students were randomly assigned blocks of questions (in addition to randomly being assigned 1 of 6 forms). Thus, sample sizes for 2021 (n = 537) and 2022 (n = 576) were also comparably smaller than prior year).</p>
+<div class="cell">
+<div class="cell-output-display">
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:200px; ">
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">year</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">502</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2021</td>
+<td style="text-align: right;">537</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2022</td>
+<td style="text-align: right;">576</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2016</td>
+<td style="text-align: right;">1626</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2017</td>
+<td style="text-align: right;">1696</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2014</td>
+<td style="text-align: right;">1724</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2018</td>
+<td style="text-align: right;">1744</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2013</td>
+<td style="text-align: right;">1777</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">1780</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2019</td>
+<td style="text-align: right;">1783</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2015</td>
+<td style="text-align: right;">1814</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2001</td>
+<td style="text-align: right;">1837</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2002</td>
+<td style="text-align: right;">1841</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2009</td>
+<td style="text-align: right;">1891</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2008</td>
+<td style="text-align: right;">1954</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2012</td>
+<td style="text-align: right;">1972</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1999</td>
+<td style="text-align: right;">1978</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2011</td>
+<td style="text-align: right;">1983</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2006</td>
+<td style="text-align: right;">2028</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2010</td>
+<td style="text-align: right;">2029</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1996</td>
+<td style="text-align: right;">2056</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2004</td>
+<td style="text-align: right;">2099</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2007</td>
+<td style="text-align: right;">2100</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2005</td>
+<td style="text-align: right;">2122</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2003</td>
+<td style="text-align: right;">2130</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1997</td>
+<td style="text-align: right;">2156</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1998</td>
+<td style="text-align: right;">2226</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1992</td>
+<td style="text-align: right;">2237</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1994</td>
+<td style="text-align: right;">2243</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1991</td>
+<td style="text-align: right;">2246</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1995</td>
+<td style="text-align: right;">2263</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1990</td>
+<td style="text-align: right;">2270</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1993</td>
+<td style="text-align: right;">2273</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1989</td>
+<td style="text-align: right;">2511</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1976</td>
+<td style="text-align: right;">2697</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1986</td>
+<td style="text-align: right;">2746</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1979</td>
+<td style="text-align: right;">2824</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1984</td>
+<td style="text-align: right;">2856</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1980</td>
+<td style="text-align: right;">2857</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1985</td>
+<td style="text-align: right;">2878</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1987</td>
+<td style="text-align: right;">2920</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1983</td>
+<td style="text-align: right;">2929</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1988</td>
+<td style="text-align: right;">2935</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1977</td>
+<td style="text-align: right;">3083</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1978</td>
+<td style="text-align: right;">3120</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1982</td>
+<td style="text-align: right;">3131</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1981</td>
+<td style="text-align: right;">3135</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+</div>
+</div>
+</section>
+<section id="survey-mode" class="level2">
+<h2 class="anchored" data-anchor-id="survey-mode">Survey Mode</h2>
+<p>In 2019, schools were randomly assigned paper or tablet surveys, whereas prior years consisted entirely of paper surveys. Students surveyed in 2020 all completed the surveys on tablets. In 2021 and 2022, students completed the surveys via the web on their personal or school-provided device. Given that the decline in the trends started before the survey mode changes, these mode adjustments cannot fully account for the findings.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

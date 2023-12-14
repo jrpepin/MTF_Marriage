@@ -3,8 +3,10 @@ title: "Supplementary Material"
 author: "Joanna R. Pepin and Philip N. Cohen"
 date: today
 ---
+  
+<br> 
 
-Full replication code for data access, variable construction, cell sizes and distribution, chi-squared tests, and data visualization creation is available in a Github repository: <https://github.com/jrpepin/MTF_Marriage>.
+Full replication code for data access, variable construction, cell sizes and distribution, and data visualization creation is available in a Github repository: <https://github.com/jrpepin/MTF_Marriage>.
 
 ```{r setup}
 #| echo: false
@@ -20,26 +22,31 @@ Full replication code for data access, variable construction, cell sizes and dis
 #| file: scripts/ME_01_measures and sample.R
 ```
 
-```{r figure-01}
-#| echo: false
-#| output: false
-#| tbl-cap: ""
-#| file: scripts/ME_02_figure.R
-```
-
 # Data --------------------------------------------------------------
+
+Data come from the 12th-grade student surveys from the [Monitoring the Future (MTF) Public-Use Cross-Sectional Datasets (1976-2022)](https://monitoringthefuture.org/). The National Institutes of Health funds the cross-sectional surveys through a series of grants from the National Institute on Drug Abuse. The National Addiction and HIV Data Archive Program provides the data to [ICPSR (study 35)](https://www.icpsr.umich.edu/web/ICPSR/series/35) for public download.
 
 # Measures -------------------------------------------------------
 
-## *Marriage expectations*
+Core questions are asked of all respondents and then specific questions appear on one of the five or six forms. This data visualization consists of variables which appeared on form 2 of the surveys.
 
-## *Gender*
+## *HOW GD AS SPOUSE (V2312)*
 
-## *Race*
+Respondents were told to guess how well they might do in several different situations and the asked them: "How good do you think you would be ...?" The first situation, which we present in this data visualization, asks them to evaluate how good they think they will be: "as a husband or wife." Possible responses included: (1) poor, (2) not so good, (3) fairly good, (4) good, and (5) very good. Some survey years also allowed (8) don't know, but this choice was not available consistently across the survey years and instead coded as missing. Therefore, this analysis excluded the "don't know" response choices from analyses.
 
-## *Mothers' education*
+## *THINK WILL MARRY (V2239)*
+
+The second marital expectation used in this data visualization asked respondents "Which do you think you are most likely to choose in the long run?" The answer choices consisted of: (1) Not getting married, (2) I have no idea, (3) getting married, or (8) I am already married. The number of students who reported they were already married was tiny (e.g., \< 1% in 2022), so we recoded these students as "getting married."
+
+## *SEX*
+
+We used a dichotomous indicator of sex to distinguish young men and young women. Respondents were asked "What is your sex?" Although newer survey years include options "other" and "prefer not to answer", for consistency across survey years and due to sample sizes, we restrict the analyses to respondents who reported "male" or "female."
 
 # Sample ----------------------------------------------------------
+
+A multi-stage random sampling procedure provides a nationally representative sample of U.S. twelfth grade students, who are surveyed each spring. This data visualization is based on a sample of 102,115 U.S. twelfth graders, who answered both marital expectations questions, and who identified their sex as male or female. The data visualization uses the provided sampling weights assigned to each respondent to account for selection probabilities. 
+
+In addition to our two dependent variables and key independent variable, MTF also includes a number of other demographic variables. Our aim is to get an overall impression of attitude trends, so we do not adjust models for these variables but provide them two demographic information in the supplemental table below.
 
 ```{r table01, echo=FALSE}
 #| echo: false
@@ -47,6 +54,21 @@ Full replication code for data access, variable construction, cell sizes and dis
 knit_print(tabA)
 
 ```
+  
+# Additional Notes -------------------------------------------------------------
 
-# Chi-squared tests ---------------------------------------------
+## Sample Sizes
+Between 1976 and 2019, the number of students in our sample ranged from 1626 to 3135. In 2020, survey collection was ended due to the COVID-19 pandemic, resulting in a sample size (n = 502) about 25% the size of previous surveys. Starting in 2021, efforts to shorten the length of the survey meant students were randomly assigned blocks of questions (in addition to randomly being assigned 1 of 6 forms). Thus, sample sizes for 2021 (n = 537) and 2022 (n = 576) were also comparably smaller than prior year).
 
+```{r counts}
+#| echo: false
+
+kable(counts %>%  arrange(n), "html", booktabs = T) %>%
+    kable_styling(position = "center") %>%
+    scroll_box(height = "200px")
+
+```
+  
+## Survey Mode
+In 2019, schools were randomly assigned paper or tablet surveys, whereas prior years consisted entirely of paper surveys. 
+Students surveyed in 2020 all completed the surveys on tablets. In 2021 and 2022, students completed the surveys via the web on their personal or school-provided device. Given that the decline in the trends started before the survey mode changes, these mode adjustments cannot fully account for the findings.

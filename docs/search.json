@@ -11,7 +11,7 @@
     "href": "Supplementary Material.html",
     "title": "Supplementary Material",
     "section": "",
-    "text": "Full replication code for data access, variable construction, cell sizes and distribution, chi-squared tests, and data visualization creation is available in a Github repository: https://github.com/jrpepin/MTF_Marriage."
+    "text": "Full replication code for data access, variable construction, cell sizes and distribution, and data visualization creation is available in a Github repository: https://github.com/jrpepin/MTF_Marriage."
   },
   {
     "objectID": "Supplementary Material.html#marriage-expectations",
@@ -40,5 +40,40 @@
     "title": "Supplementary Material",
     "section": "Mothers’ education",
     "text": "Mothers’ education"
+  },
+  {
+    "objectID": "Supplementary Material.html#how-gd-as-spouse-v2312",
+    "href": "Supplementary Material.html#how-gd-as-spouse-v2312",
+    "title": "Supplementary Material",
+    "section": "HOW GD AS SPOUSE (V2312)",
+    "text": "HOW GD AS SPOUSE (V2312)\nRespondents were told to guess how well they might do in several different situations and the asked them: “How good do you think you would be …?” The first situation, which we present in this data visualization, asks them to evaluate how good they think they will be: “as a husband or wife.” Possible responses included: (1) poor, (2) not so good, (3) fairly good, (4) good, and (5) very good. Some survey years also allowed (8) don’t know, but this choice was not available consistently across the survey years and instead coded as missing. Therefore, this analysis excluded the “don’t know” response choices from analyses."
+  },
+  {
+    "objectID": "Supplementary Material.html#think-will-marry-v2239",
+    "href": "Supplementary Material.html#think-will-marry-v2239",
+    "title": "Supplementary Material",
+    "section": "THINK WILL MARRY (V2239)",
+    "text": "THINK WILL MARRY (V2239)\nThe second marital expectation used in this data visualization asked respondents “Which do you think you are most likely to choose in the long run?” The answer choices consisted of: (1) Not getting married, (2) I have no idea, (3) getting married, or (8) I am already married. The number of students who reported they were already married was tiny (e.g., &lt; 1% in 2022), so we recoded these students as “getting married.”"
+  },
+  {
+    "objectID": "Supplementary Material.html#sex",
+    "href": "Supplementary Material.html#sex",
+    "title": "Supplementary Material",
+    "section": "SEX",
+    "text": "SEX\nWe used a dichotomous indicator of sex to distinguish young men and young women. Respondents were asked “What is your sex?” Although newer survey years include options “other” and “prefer not to answer”, for consistency across survey years and due to sample sizes, we restrict the analyses to respondents who reported “male” or “female.”"
+  },
+  {
+    "objectID": "Supplementary Material.html#survey-mode",
+    "href": "Supplementary Material.html#survey-mode",
+    "title": "Supplementary Material",
+    "section": "Survey Mode",
+    "text": "Survey Mode\nIn 2019, schools were randomly assigned paper or tablet surveys, whereas prior years consisted entirely of paper surveys. Students surveyed in 2020 all completed the surveys on tablets. In 2021 and 2022, students completed the surveys via the web on their personal or school-provided device. Given that the decline in the trends started before the survey mode changes, these mode adjustments cannot fully account for the findings."
+  },
+  {
+    "objectID": "Supplementary Material.html#sample-sizes",
+    "href": "Supplementary Material.html#sample-sizes",
+    "title": "Supplementary Material",
+    "section": "Sample Sizes",
+    "text": "Sample Sizes\nBetween 1976 and 2019, the number of students in our sample ranged from 1626 to 3135. In 2020, survey collection was ended due to the COVID-19 pandemic, resulting in a sample size (n = 502) about 25% the size of previous surveys. Starting in 2021, efforts to shorten the length of the survey meant students were randomly assigned blocks of questions (in addition to randomly being assigned 1 of 6 forms). Thus, sample sizes for 2021 (n = 537) and 2022 (n = 576) were also comparably smaller than prior year).\n\n\n\n\n\n\nyear\nn\n\n\n\n\n2020\n502\n\n\n2021\n537\n\n\n2022\n576\n\n\n2016\n1626\n\n\n2017\n1696\n\n\n2014\n1724\n\n\n2018\n1744\n\n\n2013\n1777\n\n\n2000\n1780\n\n\n2019\n1783\n\n\n2015\n1814\n\n\n2001\n1837\n\n\n2002\n1841\n\n\n2009\n1891\n\n\n2008\n1954\n\n\n2012\n1972\n\n\n1999\n1978\n\n\n2011\n1983\n\n\n2006\n2028\n\n\n2010\n2029\n\n\n1996\n2056\n\n\n2004\n2099\n\n\n2007\n2100\n\n\n2005\n2122\n\n\n2003\n2130\n\n\n1997\n2156\n\n\n1998\n2226\n\n\n1992\n2237\n\n\n1994\n2243\n\n\n1991\n2246\n\n\n1995\n2263\n\n\n1990\n2270\n\n\n1993\n2273\n\n\n1989\n2511\n\n\n1976\n2697\n\n\n1986\n2746\n\n\n1979\n2824\n\n\n1984\n2856\n\n\n1980\n2857\n\n\n1985\n2878\n\n\n1987\n2920\n\n\n1983\n2929\n\n\n1988\n2935\n\n\n1977\n3083\n\n\n1978\n3120\n\n\n1982\n3131\n\n\n1981\n3135"
   }
 ]

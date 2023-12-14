@@ -25,7 +25,6 @@ df1 <- mtf_svy %>%
   group_by(year, sex, goodsp) %>%
   summarize(vals  = survey_mean(na.rm = TRUE, vartype = "ci")) # create summary proportions
 
-
 ## GETMAR
 df2 <- mtf_svy %>%
   drop_na(sex) %>% # remove cases w/ missing sex
@@ -34,18 +33,18 @@ df2 <- mtf_svy %>%
 
 ## Point Change dfs
 df_pc2 <- df2 %>%
-  filter(year == 1976 | year == 2022) %>%
+  filter(year == 2012 | year == 2022) %>%
   pivot_wider(id_cols     = c(sex, mar3), 
               names_from  = year, 
               values_from = c(vals, vals_low, vals_upp)) %>%
-  mutate(pct_chg = vals_2022 - vals_1976,
+  mutate(pct_chg = vals_2022 - vals_2012,
          label   = scales::percent(pct_chg %>% round(2)))
 
 # VISUALIZE ------------------------------------------------------------------
 ### GOOD SP
 p1 <- df1 %>%
   ggplot(aes(x = year, y = vals, color = goodsp, shape = goodsp, ymin = vals_low, ymax = vals_upp)) +
-  geom_smooth(method = loess, fill = "grey90", size = .75) +
+  geom_smooth(method = loess, fill = "grey90", linewidth = .75) +
   geom_point(aes(alpha = .9), show.legend = FALSE) +
   facet_wrap("sex")  +
   theme_minimal() +
@@ -74,7 +73,7 @@ p1
 p2 <- df2 %>%
   mutate(mar3 = factor(mar3, levels = c("Getting married", "I have no idea", "Not getting married"))) %>%
   ggplot(aes(x = year, y = vals, color = mar3, ymin = vals_low, ymax = vals_upp)) +
-  geom_smooth(method = loess, fill = "grey80", size = .75) +
+  geom_smooth(method = loess, fill = "grey80", linewidth = .75) +
   geom_point(aes(alpha = .9), show.legend = FALSE) +
   facet_wrap("sex")  +
   scale_y_continuous(labels = scales::percent_format(accuracy = 1), 
@@ -106,7 +105,7 @@ p3 <- df_pc2 %>%
   geom_hline(yintercept = 0) +
   facet_wrap("sex", ncol = 1) +
   geom_text(aes(label = label, vjust = -0.5)) +
-  scale_y_continuous(limits = c(-.11, 0.10)) +
+  scale_y_continuous(limits = c(-.2, 0.15)) +
   theme_minimal() +
   theme(strip.text.x        = element_text(face = "bold.italic", size = 10, hjust = 0),
         strip.placement     = "outside",
@@ -125,7 +124,7 @@ p3 <- df_pc2 %>%
                                   "Not getting married" = "Not get\nmarried")) +
   scale_fill_manual(values = c(mar3_palette)) +
   labs( title    = "Panel C.",
-        subtitle = "Percentage point change\n1976 - 2022",
+        subtitle = "Percentage point change\n2012 - 2022",
         x        = " ", 
         y        = " ",
         caption  = " ")

@@ -20,11 +20,12 @@ data <- select(mtf_V2, V5, ARCHIVE_WT, V1, V13, TABLET,     # Survey variables
 
 ## Rename Variables
 data <- dplyr::rename(data,      
-                      wt7611 = V5,       wt1222 = ARCHIVE_WT,  
-                      getmar   = V2239,  gdsp   = V2312,
-                      raceeth  = V2151,  year   = V1,          region   = V13,
-                      gender   = V2150,  momed  = V2164,       religion = V2169,
-                      father = V2155,    mother = V2156)
+                      wt7611   = V5,     wt1222   = ARCHIVE_WT,  
+                      gdsp     = V2312,  getmar   = V2239,
+                      year     = V1,     gender   = V2150,  
+                      raceeth  = V2151,  region   = V13,
+                      momed    = V2164,  religion = V2169,
+                      father   = V2155,  mother = V2156)
 
 ## Sample size
 count(data)
@@ -191,33 +192,46 @@ glimpse(data)
 ## Missing data  
 colSums(is.na(data))
 
+data <- data %>%
+  # exclude cases missing on DVs
+  drop_na(mar3) %>% 
+  drop_na(goodsp) %>%
+  # exclude cases missing on key IV
+  drop_na(sex) 
+
+data %>%
+  count() # analytic sample size
+
+counts <- data %>%
+  group_by(year) %>%
+  count()
+
 ## Create survey data 
 mtf_svy <- data %>%
   # exclude cases missing on DVs
   drop_na(mar3) %>% 
   drop_na(goodsp) %>%
+  # exclude cases missing on key IV
+  drop_na(sex) %>%
   # weight data
   as_survey_design(id = 1,
                    weights = svyweight)
 
 ## Create table
 tabA <- mtf_svy %>%
-  select(c(-svyweight, -year, -mardum, -racesex)) %>%
+  select(c(-svyweight, -year, -mardum, -racesex, -famstru, -religion, -region, -tablet)) %>%
   tbl_svysummary(
     label = list(mar3     ~ "Marriage expectations",
                  goodsp   ~ "Good as a spouse",
                  sex      ~ "Gender",
                  race     ~ "Race",
-                 momed    ~ "Mothers' education",
-                 famstru  ~ "Family structure when growing up",
-                 religion ~ "Religiosity",
-                 region   ~ "Region",
-                 tablet   ~ "Survey mode (2019)"))  %>%
+                 momed    ~ "Mothers' education"))  %>%
   modify_header(
     label = '**Variable**',
-    stat_0 = '**N (unweighted) = 118966**') %>%
-  modify_caption("Summary statistics of the pooled (weighted) analytic sample") %>%
+    stat_0 = '**N (unweighted) = 102115**') %>%
+  modify_caption("Weighted summary statistics of the pooled analytic sample") %>%
   as_flex_table() 
+#  add_footer_lines("notes")
 
 save_as_docx(tabA, path = file.path(outDir, "tabA.docx"))
   
