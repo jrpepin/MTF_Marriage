@@ -30,6 +30,7 @@ pacman::p_load(
   MESS,       # round prop & preserve sum to 100%
   data.table, #
   survey,     # create weighted dataset for tables
+  openxlsx,   # save figure data to Excel
   gtsummary,  # pretty weighted tables
   flextable,  # displaying pretty tables
   ggplot2,    # graphing
