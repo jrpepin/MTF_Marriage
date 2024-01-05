@@ -194,7 +194,7 @@ colSums(is.na(data))
 
 data <- data %>%
   # exclude cases missing on DVs
-  drop_na(mar3) %>% 
+  drop_na(mar3)   %>% 
   drop_na(goodsp) %>%
   # exclude cases missing on key IV
   drop_na(sex) 
