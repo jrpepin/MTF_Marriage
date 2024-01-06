@@ -2,6 +2,20 @@
 title: "Supplementary Material"
 author: "Joanna R. Pepin and Philip N. Cohen"
 date: today
+format:
+  html: 
+    toc: true
+    output-file: index
+  docx: 
+    toc: false
+    number-sections: true
+    number-depth: 3
+    geometry:
+      - top=2cm
+      - bottom=3cm
+      - left=2.5cm
+      - right=2.5cm
+prefer-html: true # for kable tables in word
 ---
 
 <br>

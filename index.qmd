@@ -1,5 +1,5 @@
 ---
-title: "Marriage Expectations"
+title: "Growing Uncertainty in Marriage Expectations Among U.S. Youth"
 author: "Joanna R. Pepin and Philip N. Cohen"
 date: today
 bibliography: references.bib
@@ -19,7 +19,7 @@ filters:
 
 # Abstract
 
-Marriage rates are falling in the United States. We ask whether today’s young adults are likely to continue this trend. Using [Monitoring the Future (MTF) Public-Use Cross-Sectional Datasets (1976-2022)](https://www.icpsr.umich.edu/web/ICPSR/series/35), this visualization presents U.S. twelfth graders’ marriage expectations. It shows declining optimism that they will be a “very good” spouse, and declining expectations they will eventually marry. Both trends are pronounced in the last 10 years, and both are more dramatic among young women. If these trends hold it may foretell further declines in marriage ra
+Marriage rates are falling in the United States. We ask whether today’s young adults are likely to continue this trend. Using [Monitoring the Future (MTF) Public-Use Cross-Sectional Datasets (1976-2022)](https://www.icpsr.umich.edu/web/ICPSR/series/35), this visualization presents U.S. twelfth graders’ marriage expectations. It shows declining optimism that they will be a “very good” spouse, and declining expectations they will eventually marry. Both trends are pronounced in the last 10 years, and both are more dramatic among young women. If these trends hold it may foretell further declines in marriage rates in the coming years.  
 
 ### Keywords
 
