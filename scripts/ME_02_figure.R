@@ -148,12 +148,12 @@ ptext <- annotate_figure(p,
 plbl <- ptext +
   annotate("text", x = .33, y = .54, label = "very good",        size = 8/.pt, fontface =2, hjust = 0, color = "#18BC9C") +
   annotate("text", x = .33, y = .43, label = "good",             size = 8/.pt, fontface =2, hjust = 0, color = "#3498DB") +
-  annotate("text", x = .33, y = .35, label = "fairly good",      size = 8/.pt, fontface =2, hjust = 0, color = "#6f42c1") +
+  annotate("text", x = .33, y = .34, label = "fairly good",      size = 8/.pt, fontface =2, hjust = 0, color = "#6f42c1") +
   annotate("text", x = .33, y = .29, label = "not so good",      size = 8/.pt, fontface =2, hjust = 0, color = "#E74C3C") +
   annotate("text", x = .33, y = .27, label = "poor",             size = 8/.pt, fontface =2, hjust = 0, color = "#F39C12") +
   annotate("text", x = .57, y = .64, label = "get\nmarried",     size = 8/.pt, fontface =2, hjust = 0, color = "#18BC9C") +
-  annotate("text", x = .57, y = .42, label = "has\nno idea",     size = 8/.pt, fontface =2, hjust = 0, color = "#3498DB") +
-  annotate("text", x = .57, y = .33, label = "not get\nmarried", size = 8/.pt, fontface =2, hjust = 0, color = "#E74C3C")
+  annotate("text", x = .57, y = .39, label = "has\nno idea",     size = 8/.pt, fontface =2, hjust = 0, color = "#3498DB") +
+  annotate("text", x = .57, y = .29, label = "not get\nmarried", size = 8/.pt, fontface =2, hjust = 0, color = "#E74C3C")
 
 plbl
 
