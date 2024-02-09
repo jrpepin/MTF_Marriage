@@ -13,9 +13,9 @@
 
 
 # Define color palette ---------------------------------------------------------
-goodsp_palette <- c("#18BC9C","#3498DB", "#6f42c1","#E74C3C", "#F39C12")
+goodsp_palette <- c("#18BC9C","#6f42c1", "#F39C12", "#3498DB", "#E74C3C")
 
-mar3_palette = c( "#18BC9C","#3498DB", "#E74C3C")
+mar3_palette = c( "#18BC9C","#F39C12", "#E74C3C")
 
 # CREATE FIGURE DATA -----------------------------------------------------------
 
@@ -25,16 +25,28 @@ df1 <- mtf_svy %>%
   group_by(year, sex, goodsp) %>%
   summarize(vals  = survey_mean(na.rm = TRUE, vartype = "ci")) # create summary proportions
 
+## Point Change dfs
+df_pc1 <- mtf_svy %>%
+  drop_na(sex) %>% # remove cases w/ missing sex
+  group_by(year, sex, goodsp_lbl) %>%
+  summarize(vals  = survey_mean(na.rm = TRUE, vartype = "ci")) %>%
+  filter(year == 2012 | year == 2022) %>%
+  pivot_wider(id_cols     = c(sex, goodsp_lbl), 
+              names_from  = year, 
+              values_from = c(vals, vals_low, vals_upp)) %>%
+  mutate(pct_chg = vals_2022 - vals_2012,
+         label   = scales::percent(pct_chg %>% round(2)))
+
 ## GETMAR
 df2 <- mtf_svy %>%
   drop_na(sex) %>% # remove cases w/ missing sex
-  group_by(year, sex, mar3) %>%
+  group_by(year, sex, mar3_lbl) %>%
   summarize(vals  = survey_mean(na.rm = TRUE, vartype = "ci")) # create summary proportions
 
 ## Point Change dfs
 df_pc2 <- df2 %>%
   filter(year == 2012 | year == 2022) %>%
-  pivot_wider(id_cols     = c(sex, mar3), 
+  pivot_wider(id_cols     = c(sex, mar3_lbl), 
               names_from  = year, 
               values_from = c(vals, vals_low, vals_upp)) %>%
   mutate(pct_chg = vals_2022 - vals_2012,
@@ -45,14 +57,23 @@ write.xlsx(names, file = file.path(outDir, "figdata.xlsx"))
 
 # VISUALIZE ------------------------------------------------------------------
 ### GOOD SP
+
 p1 <- df1 %>%
   ggplot(aes(x = year, y = vals, color = goodsp, shape = goodsp, ymin = vals_low, ymax = vals_upp)) +
+  geom_hline(yintercept=c(0, .5), color = "grey90") +
   geom_smooth(method = loess, fill = "grey90", linewidth = .75) +
   geom_point(aes(alpha = .9), show.legend = FALSE) +
-  facet_wrap("sex")  +
+  geom_text_repel(aes(label = goodsp), # This plots the labels on the right side without overlap.
+                  data           = subset(df1, sex == "Women" & year == 2022), # Only plot the labels 1 time
+                  segment.colour = NA,
+                  nudge_x        = 20, 
+                  direction      = "y", 
+                  hjust          = "left",
+                  size           = 3)   +
+  facet_wrap("sex", scales = "free_x")  +
   theme_minimal() +
   scale_y_continuous(labels = scales::percent_format(accuracy = 1), 
-                     limits = c(0, 1), 
+                     limits = c(0, .9), 
                      breaks = c(.5)) +
   scale_x_continuous(breaks = c(1976, 2022)) +
   theme(strip.text.x        = element_text(face = "bold.italic", size = 10, hjust = 0),
@@ -63,24 +84,30 @@ p1 <- df1 %>%
         plot.caption        = element_text(color = "grey70", face = "italic"),
         legend.position     = "none",
         plot.title.position = "plot",
-        plot.margin = unit(c(0.25, 0.5, 0.05, 0.25), "inches")) +
-  geom_hline(yintercept=c(0, .5), color = "grey90") +
+        plot.margin         = unit(c(0.25, 0.5, 0.05, 0.25), "inches")) +
   scale_color_manual(values = c(goodsp_palette)) +
-  labs( x        = " ", 
-        y        = " ",
-        title    = "Panel A.",
-        subtitle = "% who think they will be _______ as a spouse")
+  labs( x        = NULL, 
+        y        = NULL,
+        title    = NULL,
+        subtitle = "Panel A.% who think they will be _______ as a spouse")
 p1
 
 ### MAR3
 p2 <- df2 %>%
-  mutate(mar3 = factor(mar3, levels = c("Getting married", "I have no idea", "Not getting married"))) %>%
-  ggplot(aes(x = year, y = vals, color = mar3, ymin = vals_low, ymax = vals_upp)) +
+  ggplot(aes(x = year, y = vals, color = mar3_lbl, ymin = vals_low, ymax = vals_upp)) +
+  geom_hline(yintercept=c(0, .5), color = "grey90") +
   geom_smooth(method = loess, fill = "grey80", linewidth = .75) +
   geom_point(aes(alpha = .9), show.legend = FALSE) +
-  facet_wrap("sex")  +
+  geom_text_repel(aes(label = mar3_lbl), # This plots the labels on the right side without overlap.
+                  data           = subset(df2, sex == "Men" & year == 2022), # Only plot the labels 1 time
+                  segment.colour = NA,
+                  nudge_x        = 17, 
+                  direction      = "y", 
+                  hjust          = "left",
+                  size           = 3)   +
+  facet_wrap("sex", scales = "free_x")  +
   scale_y_continuous(labels = scales::percent_format(accuracy = 1), 
-                     limits = c(0, 1), 
+                     limits = c(0, .9), 
                      breaks = c()) +
   scale_x_continuous(breaks = c(1976, 2022)) +
   scale_color_manual(values = c(mar3_palette)) +
@@ -92,22 +119,50 @@ p2 <- df2 %>%
         panel.grid.major    = element_blank(),
         legend.position     = "none",
         plot.title.position = "plot",
-        plot.margin = unit(c(0.25, 0.2, 0.05, 0.75), "inches")) +
-  geom_hline(yintercept=c(0, .5), color = "grey90") +
-  labs( x        = " ", 
-        y        = " ",
-        title    = "Panel B.",
-        subtitle = "% who think they will _______")
+        plot.margin         = unit(c(0.25, 0.25, 0.05, 0.25), "inches")) +
+  labs( x        = NULL, 
+        y        = NULL,
+        title    = NULL,
+        subtitle = "Panel B. % who think they will _______")
 p2
 
+
 ## Panel C. Change from 1976 to 2022
-p3 <- df_pc2 %>%
-  mutate(mar3 = factor(mar3, levels = c("Getting married", "I have no idea", "Not getting married"))) %>%
-  ggplot(aes(x = mar3, y = pct_chg, fill = mar3)) +
+p3 <- df_pc1 %>%
+  ggplot(aes(x = goodsp_lbl, y = pct_chg, fill = goodsp_lbl)) +
   geom_col(aes(alpha = .9), width = 0.4) +
   geom_hline(yintercept = 0) +
-  facet_wrap("sex", ncol = 1) +
-  geom_text(aes(label = label, vjust = -0.5)) +
+  facet_wrap("sex", ncol = 2) +
+  geom_text(aes(label = label, vjust = -0.5), size= 3) +
+  scale_y_continuous(limits = c(-.2, 0.15)) +
+  theme_minimal() +
+  theme(strip.text.x        = element_text(face = "bold.italic", size = 10, hjust = 0),
+        strip.placement     = "outside",
+        panel.spacing       = unit(.5, "lines"),
+        axis.text.x         = element_markdown(colour = c(goodsp_palette)),
+        axis.text.y         = element_blank(), 
+        axis.ticks.y        = element_blank(),
+        panel.grid.minor    = element_blank(),
+        panel.grid.major    = element_blank(),
+        plot.title.position = "plot",
+        legend.position     = "none",
+        plot.margin         = unit(c(0.25, 0.5, 0.00, 0.25), "inches")) +
+  scale_x_discrete(position = "top") +
+  scale_fill_manual(values = c(goodsp_palette)) +
+  labs( x        = NULL, 
+        y        = NULL,
+        title    = " ",
+        subtitle = "Panel C. % point change from 2012 to 2022")
+p3
+
+
+## Panel D. Change from 1976 to 2022
+p4 <- df_pc2 %>%
+  ggplot(aes(x = mar3_lbl, y = pct_chg, fill = mar3_lbl)) +
+  geom_col(aes(alpha = .9), width = 0.25) +
+  geom_hline(yintercept = 0) +
+  facet_wrap("sex", ncol = 2) +
+  geom_text(aes(label = label, vjust = -0.5), size= 3) +
   scale_y_continuous(limits = c(-.2, 0.15)) +
   theme_minimal() +
   theme(strip.text.x        = element_text(face = "bold.italic", size = 10, hjust = 0),
@@ -120,58 +175,21 @@ p3 <- df_pc2 %>%
         panel.grid.major    = element_blank(),
         plot.title.position = "plot",
         legend.position     = "none",
-        plot.margin = unit(c(0.25, 0.25, 0.05, 0.2), "inches")) +
-  scale_x_discrete(position = "top",
-                   labels   = c("Getting married"     = "Get\nmarried", 
-                                  "I have no idea"      = "Has\nno idea",
-                                  "Not getting married" = "Not get\nmarried")) +
+        plot.margin         = unit(c(0.25, 0.25, 0.00, 0.25), "inches")) +
+  scale_x_discrete(position = "top") +
   scale_fill_manual(values = c(mar3_palette)) +
-  labs( title    = "Panel C.",
-        subtitle = "Percentage point change\n2012 - 2022",
-        x        = " ", 
-        y        = " ",
-        caption  = " ")
-p3
+  labs( x        = NULL, 
+        y        = NULL,
+        title    = " ",
+        subtitle = "Panel D. % point change from 2012 to 2022")
+p4
 
 ### Put it all together
-p <- ggarrange(p1, p2, p3,
-              ncol = 3, nrow = 1, widths = c(1,1, .65))
+p <- ggarrange(p1, p2, p3, p4,
+              ncol = 2, nrow = 2, heights = c(1.1, 1), widths = c(1.1, 1))
 p
 
-ptext <- annotate_figure(p, 
-                bottom = text_grob("  Figure 1. Trends in U.S. twelfth-graders marriage expectations
-  Source: Data are from the Monitoring the Future Surveys (U.S.), 1976-2022.
-  Note: Percentages are weighted to be nationally representative of U.S. high school seniors.
-  Additional details about data access and variable construction are available at: https://github.com/jrpepin/MTF_Marriage.
-  ", hjust = 0, x = 0, size = 9))
 
-plbl <- ptext +
-  annotate("text", x = .33, y = .54, label = "very good",        size = 8/.pt, fontface =2, hjust = 0, color = "#18BC9C") +
-  annotate("text", x = .33, y = .41, label = "good",             size = 8/.pt, fontface =2, hjust = 0, color = "#3498DB") +
-  annotate("text", x = .33, y = .33, label = "fairly good",      size = 8/.pt, fontface =2, hjust = 0, color = "#6f42c1") +
-  annotate("text", x = .33, y = .27, label = "not so good",      size = 8/.pt, fontface =2, hjust = 0, color = "#E74C3C") +
-  annotate("text", x = .33, y = .25, label = "poor",             size = 8/.pt, fontface =2, hjust = 0, color = "#F39C12") +
-  annotate("text", x = .57, y = .64, label = "get\nmarried",     size = 8/.pt, fontface =2, hjust = 0, color = "#18BC9C") +
-  annotate("text", x = .57, y = .39, label = "has\nno idea",     size = 8/.pt, fontface =2, hjust = 0, color = "#3498DB") +
-  annotate("text", x = .57, y = .30, label = "not get\nmarried", size = 8/.pt, fontface =2, hjust = 0, color = "#E74C3C")
-
-plbl
-
-ggsave("marfig.png", plbl, width = 9, height = 6.5, dpi = 300, bg = 'white')
-
-## without embedded caption
-
-plbl_nocap <- p +
-  annotate("text", x = .33, y = .46, label = "very good",        size = 8/.pt, fontface =2, hjust = 0, color = "#18BC9C") +
-  annotate("text", x = .33, y = .31, label = "good",             size = 8/.pt, fontface =2, hjust = 0, color = "#3498DB") +
-  annotate("text", x = .33, y = .21, label = "fairly good",      size = 8/.pt, fontface =2, hjust = 0, color = "#6f42c1") +
-  annotate("text", x = .33, y = .14, label = "not so good",      size = 8/.pt, fontface =2, hjust = 0, color = "#E74C3C") +
-  annotate("text", x = .33, y = .12, label = "poor",             size = 8/.pt, fontface =2, hjust = 0, color = "#F39C12") +
-  annotate("text", x = .57, y = .60, label = "get\nmarried",     size = 8/.pt, fontface =2, hjust = 0, color = "#18BC9C") +
-  annotate("text", x = .57, y = .29, label = "has\nno idea",     size = 8/.pt, fontface =2, hjust = 0, color = "#3498DB") +
-  annotate("text", x = .57, y = .19, label = "not get\nmarried", size = 8/.pt, fontface =2, hjust = 0, color = "#E74C3C")
-
-plbl_nocap
-
-ggsave("peer-review/marfig.png", plbl_nocap, width = 9, height = 6.5, dpi = 300, bg = 'white')
+ggsave("marfig.png", p, width = 9, height = 6, dpi = 300, bg = 'white')
+ggsave("peer-review/marfig.png", p, width = 9, height = 6, dpi = 300, bg = 'white') # duplicate in peer review folder
 

@@ -182,6 +182,22 @@ data <- data %>%
   select(svyweight, year, mar3, mardum, goodsp, 
          sex, race, racesex, momed, famstru, religion, region, tablet) 
   
+### Add level labels 
+
+data <- data %>%
+  mutate(
+    goodsp_lbl = as_factor(case_when(
+      goodsp == "Very good"   ~ "Very\ngood",
+      goodsp == "Good"        ~ "Good",
+      goodsp == "Fairly good" ~ "Fairly\ngood",
+      goodsp == "Not so good" ~ "Not so\ngood",
+      goodsp == "Poor"        ~ "Poor",     
+      TRUE                    ~  NA_character_ )),
+    mar3_lbl = as_factor(case_when(
+      mar3 == "Getting married" ~ "Get\nmarried",
+      mar3 == "I have no idea"  ~ "Has\nno idea",
+      mar3 == "Not getting married" ~ "Not get\nmarried")))
+
 ## New Sample size
 count(data)
 
@@ -219,7 +235,7 @@ mtf_svy <- data %>%
 
 ## Create table
 tabA <- mtf_svy %>%
-  select(c(-svyweight, -year, -mardum, -racesex, -famstru, -religion, -region, -tablet)) %>%
+  select(c(-svyweight, -year, -mardum, -racesex, -famstru, -religion, -region, -tablet, -goodsp_lbl, -mar3_lbl)) %>%
   tbl_svysummary(
     label = list(mar3     ~ "Marriage expectations",
                  goodsp   ~ "Good as a spouse",

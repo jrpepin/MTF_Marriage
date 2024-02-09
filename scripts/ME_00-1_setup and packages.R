@@ -36,6 +36,7 @@ pacman::p_load(
   ggplot2,    # graphing
   colorspace, # color palettes
   ggtext,     # color text labels and hyperlinks
+  ggrepel,    # labels at end of lines
   ggpubr,     # stitch plots together
   kableExtra, # render tables
   conflicted) # choose default packages
