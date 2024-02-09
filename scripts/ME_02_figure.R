@@ -22,14 +22,11 @@ mar3_palette = c( "#18BC9C","#F39C12", "#E74C3C")
 ##GOOD SP
 df1 <- mtf_svy %>%
   drop_na(sex) %>% # remove cases w/ missing sex
-  group_by(year, sex, goodsp) %>%
+  group_by(year, sex, goodsp_lbl) %>%
   summarize(vals  = survey_mean(na.rm = TRUE, vartype = "ci")) # create summary proportions
 
 ## Point Change dfs
-df_pc1 <- mtf_svy %>%
-  drop_na(sex) %>% # remove cases w/ missing sex
-  group_by(year, sex, goodsp_lbl) %>%
-  summarize(vals  = survey_mean(na.rm = TRUE, vartype = "ci")) %>%
+df_pc1 <- df1 %>%
   filter(year == 2012 | year == 2022) %>%
   pivot_wider(id_cols     = c(sex, goodsp_lbl), 
               names_from  = year, 
@@ -59,11 +56,11 @@ write.xlsx(names, file = file.path(outDir, "figdata.xlsx"))
 ### GOOD SP
 
 p1 <- df1 %>%
-  ggplot(aes(x = year, y = vals, color = goodsp, shape = goodsp, ymin = vals_low, ymax = vals_upp)) +
+  ggplot(aes(x = year, y = vals, color = goodsp_lbl, shape = goodsp_lbl, ymin = vals_low, ymax = vals_upp)) +
   geom_hline(yintercept=c(0, .5), color = "grey90") +
   geom_smooth(method = loess, fill = "grey90", linewidth = .75) +
   geom_point(aes(alpha = .9), show.legend = FALSE) +
-  geom_text_repel(aes(label = goodsp), # This plots the labels on the right side without overlap.
+  geom_text_repel(aes(label = goodsp_lbl), # This plots the labels on the right side without overlap.
                   data           = subset(df1, sex == "Women" & year == 2022), # Only plot the labels 1 time
                   segment.colour = NA,
                   nudge_x        = 20, 
