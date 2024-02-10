@@ -130,7 +130,7 @@ p3 <- df_pc1 %>%
   geom_col(aes(alpha = .9), width = 0.4) +
   geom_hline(yintercept = 0) +
   facet_wrap("sex", ncol = 2) +
-  geom_text(aes(label = label, vjust = -0.5), size= 3) +
+  geom_text(aes(y = pct_chg + .02 * sign(pct_chg), label = label), size= 3) +
   scale_y_continuous(limits = c(-.2, 0.15)) +
   theme_minimal() +
   theme(strip.text.x        = element_text(face = "bold.italic", size = 10, hjust = 0),
@@ -159,7 +159,7 @@ p4 <- df_pc2 %>%
   geom_col(aes(alpha = .9), width = 0.25) +
   geom_hline(yintercept = 0) +
   facet_wrap("sex", ncol = 2) +
-  geom_text(aes(label = label, vjust = -0.5), size= 3) +
+  geom_text(aes(y = pct_chg + .02 * sign(pct_chg), label = label), size= 3) +
   scale_y_continuous(limits = c(-.2, 0.15)) +
   theme_minimal() +
   theme(strip.text.x        = element_text(face = "bold.italic", size = 10, hjust = 0),
