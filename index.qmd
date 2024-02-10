@@ -19,7 +19,7 @@ filters:
 
 # Abstract
 
-Marriage rates are falling in the United States. We ask whether today’s young adults are likely to continue this trend. Using [Monitoring the Future (MTF) Public-Use Cross-Sectional Datasets (1976-2022)](https://www.icpsr.umich.edu/web/ICPSR/series/35), this visualization presents U.S. twelfth graders’ marriage expectations. It shows declining optimism that they will be a “very good” spouse, and declining expectations they will eventually marry. Both trends are pronounced in the last 10 years, and both are more dramatic among young women. If these trends hold it may foretell further declines in marriage rates in the coming years.  
+Marriage rates are falling in the United States. We ask whether today’s young adults are likely to continue this trend. Using [Monitoring the Future (MTF) Public-Use Cross-Sectional Datasets (1976-2022)](https://www.icpsr.umich.edu/web/ICPSR/series/35), this visualization presents U.S. twelfth graders’ marriage expectations. It shows declining optimism that they will be a “very good” spouse, and declining expectations they will eventually marry. Both trends are pronounced in the last 10 years, and both are more dramatic among young women. If these trends hold it may foretell further declines in marriage rates in the coming years.
 
 ### Keywords
 
@@ -60,10 +60,17 @@ Trends in expectations of marriage mirror those for spousal performance (panel B
 #| echo: false
 #| tbl-cap: ""
 
-plbl
+p
 
 ```
 
+::: {style="font-size: 80%"}
+**Figure 1.** Trends in U.S. twelfth-graders attitudes toward marriage.
+
+The figure shows data from the 1976-2022 Monitoring the Future Public-Use Cross-Sectional Datasets, a nationally representative annual survey of U.S. high school seniors. Panel A is young adults’ assessment of how good a spouse they expect to be, by gender (very good, fairly good, good, not so good, or poor), by gender. Panel B is their expectation of marriage (get married, not get married, or no idea), also by gender. The bottom panels show the percentage point change over the 10 years from 2012 to 2022 for how good a spouse they will be (Panel C) and their expectation of marriage (Panel D). Over the last 10 years, the percentage of high school seniors who think they will make very good spouses has dropped, as has the percentage expecting to marry. Data access and replication code are available at: \[github-repository-redacted-for-peer-review\].
+:::
+  
+  
 Overall, the last decade shows a large drop in both the proportion of youth who think they will be good spouse and the proportion who expect to get married – especially among young women. Whether today’s teens they will continue to drive marriage rates downward is unclear but the major mood swing on marriage appears persistent at least through 2022, which implies future declines in marriage may be on the horizon.
 
 # References
