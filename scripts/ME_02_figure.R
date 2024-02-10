@@ -22,11 +22,14 @@ mar3_palette = c( "#18BC9C","#F39C12", "#E74C3C")
 ##GOOD SP
 df1 <- mtf_svy %>%
   drop_na(sex) %>% # remove cases w/ missing sex
-  group_by(year, sex, goodsp_lbl) %>%
+  group_by(year, sex, goodsp) %>%
   summarize(vals  = survey_mean(na.rm = TRUE, vartype = "ci")) # create summary proportions
 
 ## Point Change dfs
-df_pc1 <- df1 %>%
+df_pc1 <- mtf_svy %>%
+  drop_na(sex) %>% # remove cases w/ missing sex
+  group_by(year, sex, goodsp_lbl) %>%
+  summarize(vals  = survey_mean(na.rm = TRUE, vartype = "ci")) %>% # create summary proportions
   filter(year == 2012 | year == 2022) %>%
   pivot_wider(id_cols     = c(sex, goodsp_lbl), 
               names_from  = year, 
@@ -56,32 +59,38 @@ write.xlsx(names, file = file.path(outDir, "figdata.xlsx"))
 ### GOOD SP
 
 p1 <- df1 %>%
-  ggplot(aes(x = year, y = vals, color = goodsp_lbl, shape = goodsp_lbl, ymin = vals_low, ymax = vals_upp)) +
-  geom_hline(yintercept=c(0, .25, .5, .75), color = "grey90") +
-  geom_smooth(method = loess, fill = "grey90", linewidth = .75) +
-  geom_point(aes(alpha = .9), show.legend = FALSE) +
-  geom_text_repel(aes(label = goodsp_lbl), # This plots the labels on the right side without overlap.
-                  data           = subset(df1, sex == "Women" & year == 2022), # Only plot the labels 1 time
-                  segment.colour = NA,
-                  nudge_x        = 20, 
-                  direction      = "y", 
-                  hjust          = "left",
-                  size           = 3)   +
+  ggplot(aes(x = year, y = vals, color = goodsp, shape = goodsp, ymin = vals_low, ymax = vals_upp)) +
+  geom_hline(yintercept  = c(0, .25, .5, .75), color = "grey90") +
+  geom_smooth(method     = loess, fill = "grey80", linewidth = .65) +
+  geom_point(aes(alpha   = .7), show.legend = FALSE) +
+  # Only plot the labels 1 time -- using 2021 for not so good/poor order
+  geom_text(data         = subset(df1, sex == "Women" & year == 2021 & goodsp != "Fairly good" & goodsp != "Not so good"), 
+            aes(label    = goodsp), 
+            nudge_x      = 3,
+            hjust        = 0,
+             size        = 3)   +
+  geom_text(data         = subset(df1, sex == "Women" & year == 2021 & (goodsp == "Fairly good" | goodsp == "Not so good")), 
+            aes(label    = goodsp), 
+            nudge_x      = 3,
+            nudge_y      = .03, # adding space between labels
+            hjust        = 0,
+            size         = 3)   +
   facet_wrap("sex", scales = "free_x")  +
+  coord_cartesian(clip = 'off') +   # Allow labels to bleed past the canvas boundaries
   theme_minimal() +
   scale_y_continuous(labels = scales::percent_format(accuracy = 1), 
                      limits = c(0, .9), 
                      breaks = c(.25, .5, .75)) +
-  scale_x_continuous(breaks = c(1976, 2022)) +
+  scale_x_continuous(limit  = c(1976, 2024),
+                     breaks = c(1976, 2022)) +
   theme(strip.text.x        = element_text(face = "bold.italic", size = 10, hjust = 0),
         axis.title.y        = element_blank(),
         panel.spacing       = unit(2, "lines"),
         panel.grid.minor    = element_blank(),
         panel.grid.major    = element_blank(),
-        plot.caption        = element_text(color = "grey70", face = "italic"),
         legend.position     = "none",
         plot.title.position = "plot",
-        plot.margin         = unit(c(0.25, 0.5, 0.05, 0.25), "inches")) +
+        plot.margin         = unit(c(0.25, .5, 0.00, 0.25), "inches")) +
   scale_color_manual(values = c(goodsp_palette)) +
   labs( x        = NULL, 
         y        = NULL,
@@ -91,23 +100,24 @@ p1
 
 ### MAR3
 p2 <- df2 %>%
-  ggplot(aes(x = year, y = vals, color = mar3_lbl, ymin = vals_low, ymax = vals_upp)) +
-  geom_hline(yintercept=c(0, .25, .5, .75), color = "grey90") +
-  geom_smooth(method = loess, fill = "grey80", linewidth = .75) +
-  geom_point(aes(alpha = .9), show.legend = FALSE) +
-  geom_text_repel(aes(label = mar3_lbl), # This plots the labels on the right side without overlap.
-                  data           = subset(df2, sex == "Men" & year == 2022), # Only plot the labels 1 time
-                  segment.colour = NA,
-                  nudge_x        = 17, 
-                  direction      = "y", 
-                  hjust          = "left",
-                  size           = 3)   +
+  ggplot(aes(x = year, y = vals, color = mar3_lbl, shape = mar3_lbl, ymin = vals_low, ymax = vals_upp)) +
+  geom_hline(yintercept  = c(0, .25, .5, .75), color = "grey90") +
+  geom_smooth(method     = loess, fill = "grey80", linewidth = .65) +
+  geom_point(aes(alpha   = .7), show.legend = FALSE) +
+  geom_text(data           = subset(df2, sex == "Men" & year == 2022), # Only plot the labels 1 time
+            aes(label      = mar3_lbl), 
+            nudge_x        = 2,
+            hjust          = 0,
+            size           = 3)   +
   facet_wrap("sex", scales = "free_x")  +
+  coord_cartesian(clip = 'off') +   # Allow labels to bleed past the canvas boundaries
   scale_y_continuous(labels = scales::percent_format(accuracy = 1), 
                      limits = c(0, .9), 
                      breaks = c()) +
-  scale_x_continuous(breaks = c(1976, 2022)) +
+  scale_x_continuous(limit  = c(1976, 2024),
+                     breaks = c(1976, 2022)) +
   scale_color_manual(values = c(mar3_palette)) +
+  scale_shape_manual(values = c(16, 15, 12)) +
   theme_minimal() +
   theme(strip.text.x        = element_text(face = "bold.italic", size = 10, hjust = 0),
         axis.title.y        = element_blank(),
@@ -116,7 +126,7 @@ p2 <- df2 %>%
         panel.grid.major    = element_blank(),
         legend.position     = "none",
         plot.title.position = "plot",
-        plot.margin         = unit(c(0.25, 0.25, 0.05, 0.25), "inches")) +
+        plot.margin         = unit(c(0.25, 0.25, 0.00, 0.25), "inches")) +
   labs( x        = NULL, 
         y        = NULL,
         title    = NULL,
@@ -133,7 +143,7 @@ p3 <- df_pc1 %>%
   geom_text(aes(y = pct_chg + .02 * sign(pct_chg), label = label), size= 3) +
   scale_y_continuous(limits = c(-.2, 0.15)) +
   theme_minimal() +
-  theme(strip.text.x        = element_text(face = "bold.italic", size = 10, hjust = 0),
+  theme(strip.text.x        = element_text(face = "bold.italic", size = 9, hjust = 0),
         strip.placement     = "outside",
         panel.spacing       = unit(.5, "lines"),
         axis.text.x         = element_markdown(colour = c(goodsp_palette)),
@@ -143,7 +153,7 @@ p3 <- df_pc1 %>%
         panel.grid.major    = element_blank(),
         plot.title.position = "plot",
         legend.position     = "none",
-        plot.margin         = unit(c(0.25, 0.5, 0.00, 0.25), "inches")) +
+        plot.margin         = unit(c(0.25, 0.5, 0.00, 0.3), "inches")) +
   scale_x_discrete(position = "top") +
   scale_fill_manual(values = c(goodsp_palette)) +
   labs( x        = NULL, 
@@ -162,7 +172,7 @@ p4 <- df_pc2 %>%
   geom_text(aes(y = pct_chg + .02 * sign(pct_chg), label = label), size= 3) +
   scale_y_continuous(limits = c(-.2, 0.15)) +
   theme_minimal() +
-  theme(strip.text.x        = element_text(face = "bold.italic", size = 10, hjust = 0),
+  theme(strip.text.x        = element_text(face = "bold.italic", size = 9, hjust = 0),
         strip.placement     = "outside",
         panel.spacing       = unit(.5, "lines"),
         axis.text.x         = element_markdown(colour = c(mar3_palette)),
@@ -172,7 +182,7 @@ p4 <- df_pc2 %>%
         panel.grid.major    = element_blank(),
         plot.title.position = "plot",
         legend.position     = "none",
-        plot.margin         = unit(c(0.25, 0.25, 0.00, 0.25), "inches")) +
+        plot.margin         = unit(c(0.25, 0.25, 0.00, 0.3), "inches")) +
   scale_x_discrete(position = "top") +
   scale_fill_manual(values = c(mar3_palette)) +
   labs( x        = NULL, 
@@ -187,6 +197,6 @@ p <- ggarrange(p1, p2, p3, p4,
 p
 
 
-ggsave("marfig.png", p, width = 9, height = 6, dpi = 300, bg = 'white')
-ggsave("peer-review/marfig.png", p, width = 9, height = 6, dpi = 300, bg = 'white') # duplicate in peer review folder
+ggsave("marfig.png", p, width = 9, height = 6.5, dpi = 300, bg = 'white')
+ggsave("peer-review/marfig.png", p, width = 9, height = 6.5, dpi = 300, bg = 'white') # duplicate in peer review folder
 
