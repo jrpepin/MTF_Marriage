@@ -49,7 +49,7 @@ df_pc2 <- df2 %>%
   mutate(pct_chg = vals_2022 - vals_2012,
          label   = scales::percent(pct_chg %>% round(2)))
 
-names <- list('goodsp' = df1, 'mar3' = df2, 'mar3_change' = df_pc2)
+names <- list('goodsp' = df1, 'goodsp_change' = df_pc1, 'mar3' = df2, 'mar3_change' = df_pc2)
 write.xlsx(names, file = file.path(outDir, "figdata.xlsx"))
 
 # VISUALIZE ------------------------------------------------------------------
@@ -57,7 +57,7 @@ write.xlsx(names, file = file.path(outDir, "figdata.xlsx"))
 
 p1 <- df1 %>%
   ggplot(aes(x = year, y = vals, color = goodsp_lbl, shape = goodsp_lbl, ymin = vals_low, ymax = vals_upp)) +
-  geom_hline(yintercept=c(0, .5), color = "grey90") +
+  geom_hline(yintercept=c(0, .25, .5, .75), color = "grey90") +
   geom_smooth(method = loess, fill = "grey90", linewidth = .75) +
   geom_point(aes(alpha = .9), show.legend = FALSE) +
   geom_text_repel(aes(label = goodsp_lbl), # This plots the labels on the right side without overlap.
@@ -71,7 +71,7 @@ p1 <- df1 %>%
   theme_minimal() +
   scale_y_continuous(labels = scales::percent_format(accuracy = 1), 
                      limits = c(0, .9), 
-                     breaks = c(.5)) +
+                     breaks = c(.25, .5, .75)) +
   scale_x_continuous(breaks = c(1976, 2022)) +
   theme(strip.text.x        = element_text(face = "bold.italic", size = 10, hjust = 0),
         axis.title.y        = element_blank(),
@@ -92,7 +92,7 @@ p1
 ### MAR3
 p2 <- df2 %>%
   ggplot(aes(x = year, y = vals, color = mar3_lbl, ymin = vals_low, ymax = vals_upp)) +
-  geom_hline(yintercept=c(0, .5), color = "grey90") +
+  geom_hline(yintercept=c(0, .25, .5, .75), color = "grey90") +
   geom_smooth(method = loess, fill = "grey80", linewidth = .75) +
   geom_point(aes(alpha = .9), show.legend = FALSE) +
   geom_text_repel(aes(label = mar3_lbl), # This plots the labels on the right side without overlap.
