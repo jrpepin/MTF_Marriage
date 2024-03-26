@@ -1,6 +1,8 @@
 # Growing Uncertainty in Marriage Expectations Among U.S. Youth
 
-This repository analyzes data from the [Monitoring the Future (MTF) Public-Use Cross-Sectional Datasets (1976-2022)](https://www.icpsr.umich.edu/web/ICPSR/series/35). It creates a visualization of trends in U.S. twelfth graders marriage expectations.
+This repository analyzes data from the [Monitoring the Future (MTF) Public-Use Cross-Sectional Datasets (1976-2022)](https://www.icpsr.umich.edu/web/ICPSR/series/35){target="_blank"}. It creates a visualization of trends in U.S. twelfth graders marriage expectations.
+
+A peer-reviewed version of this visualization is available at: [https://doi.org/10.1177/23780231241241035](https://doi.org/10.1177/23780231241241035){target="_blank"}
 
 ![Figure of U.S. twelfth graders marriage expectations](https://github.com/jrpepin/MTF_Marriage/blob/main/marfig.png)
 
