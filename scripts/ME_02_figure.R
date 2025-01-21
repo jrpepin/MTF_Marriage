@@ -30,11 +30,11 @@ df_pc1 <- mtf_svy %>%
   drop_na(sex) %>% # remove cases w/ missing sex
   group_by(year, sex, goodsp_lbl) %>%
   summarize(vals  = survey_mean(na.rm = TRUE, vartype = "ci")) %>% # create summary proportions
-  filter(year == 2012 | year == 2022) %>%
+  filter(year == 2013 | year == 2023) %>%
   pivot_wider(id_cols     = c(sex, goodsp_lbl), 
               names_from  = year, 
               values_from = c(vals, vals_low, vals_upp)) %>%
-  mutate(pct_chg = vals_2022 - vals_2012,
+  mutate(pct_chg = vals_2023 - vals_2013,
          label   = scales::percent(pct_chg %>% round(2)))
 
 ## GETMAR
@@ -45,15 +45,15 @@ df2 <- mtf_svy %>%
 
 ## Point Change dfs
 df_pc2 <- df2 %>%
-  filter(year == 2012 | year == 2022) %>%
+  filter(year == 2013 | year == 2023) %>%
   pivot_wider(id_cols     = c(sex, mar3_lbl), 
               names_from  = year, 
               values_from = c(vals, vals_low, vals_upp)) %>%
-  mutate(pct_chg = vals_2022 - vals_2012,
+  mutate(pct_chg = vals_2023 - vals_2013,
          label   = scales::percent(pct_chg %>% round(2)))
 
 names <- list('goodsp' = df1, 'goodsp_change' = df_pc1, 'mar3' = df2, 'mar3_change' = df_pc2)
-write.xlsx(names, file = file.path(outDir, "figdata.xlsx"))
+write.xlsx(names, file = file.path(outDir, "figdata_updated.xlsx"))
 
 # VISUALIZE ------------------------------------------------------------------
 ### GOOD SP
@@ -81,8 +81,8 @@ p1 <- df1 %>%
   scale_y_continuous(labels = scales::percent_format(accuracy = 1), 
                      limits = c(0, .9), 
                      breaks = c(.25, .5, .75)) +
-  scale_x_continuous(limit  = c(1976, 2024),
-                     breaks = c(1976, 2022)) +
+  scale_x_continuous(limit  = c(1976, 2025),
+                     breaks = c(1976, 2023)) +
   theme(strip.text.x        = element_text(face = "bold.italic", size = 10, hjust = 0),
         axis.title.y        = element_blank(),
         panel.spacing       = unit(2, "lines"),
@@ -114,8 +114,8 @@ p2 <- df2 %>%
   scale_y_continuous(labels = scales::percent_format(accuracy = 1), 
                      limits = c(0, .9), 
                      breaks = c()) +
-  scale_x_continuous(limit  = c(1976, 2024),
-                     breaks = c(1976, 2022)) +
+  scale_x_continuous(limit  = c(1976, 2025),
+                     breaks = c(1976, 2023)) +
   scale_color_manual(values = c(mar3_palette)) +
   scale_shape_manual(values = c(16, 15, 12)) +
   theme_minimal() +
@@ -134,7 +134,7 @@ p2 <- df2 %>%
 p2
 
 
-## Panel C. Change from 1976 to 2022
+## Panel C. Change from 1976 to 2023
 p3 <- df_pc1 %>%
   ggplot(aes(x = goodsp_lbl, y = pct_chg, fill = goodsp_lbl)) +
   geom_col(aes(alpha = .9), width = 0.4) +
@@ -159,18 +159,18 @@ p3 <- df_pc1 %>%
   labs( x        = NULL, 
         y        = NULL,
         title    = " ",
-        subtitle = "Panel C. % point change from 2012 to 2022")
+        subtitle = "Panel C. % point change from 2013 to 2023")
 p3
 
 
-## Panel D. Change from 1976 to 2022
+## Panel D. Change from 1976 to 2023
 p4 <- df_pc2 %>%
   ggplot(aes(x = mar3_lbl, y = pct_chg, fill = mar3_lbl)) +
   geom_col(aes(alpha = .9), width = 0.25) +
   geom_hline(yintercept = 0) +
   facet_wrap("sex", ncol = 2) +
   geom_text(aes(y = pct_chg + .02 * sign(pct_chg), label = label), size= 3) +
-  scale_y_continuous(limits = c(-.2, 0.15)) +
+  scale_y_continuous(limits = c(-.25, 0.15)) +
   theme_minimal() +
   theme(strip.text.x        = element_text(face = "bold.italic", size = 9, hjust = 0),
         strip.placement     = "outside",
@@ -188,7 +188,7 @@ p4 <- df_pc2 %>%
   labs( x        = NULL, 
         y        = NULL,
         title    = " ",
-        subtitle = "Panel D. % point change from 2012 to 2022")
+        subtitle = "Panel D. % point change from 2013 to 2023")
 p4
 
 ### Put it all together
@@ -197,6 +197,6 @@ p <- ggarrange(p1, p2, p3, p4,
 p
 
 
-ggsave("marfig.png", p, width = 9, height = 6.5, dpi = 300, bg = 'white')
-ggsave("peer-review/marfig.png", p, width = 9, height = 6.5, dpi = 300, bg = 'white') # duplicate in peer review folder
+ggsave("marfig_updated.png", p, width = 9, height = 6.5, dpi = 300, bg = 'white')
+#ggsave("peer-review/marfig.png", p, width = 9, height = 6.5, dpi = 300, bg = 'white') # duplicate in peer review folder
 
