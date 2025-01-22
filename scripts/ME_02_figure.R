@@ -141,12 +141,13 @@ p3 <- df_pc1 %>%
   geom_hline(yintercept = 0) +
   facet_wrap("sex", ncol = 2) +
   geom_text(aes(y = pct_chg + .02 * sign(pct_chg), label = label), size= 3) +
+  scale_x_discrete(position = "top") +
   scale_y_continuous(limits = c(-.2, 0.15)) +
   theme_minimal() +
   theme(strip.text.x        = element_text(face = "bold.italic", size = 9, hjust = 0),
         strip.placement     = "outside",
         panel.spacing       = unit(.5, "lines"),
-        axis.text.x         = element_markdown(colour = c(goodsp_palette)),
+        axis.text.x         = element_text(colour = c(goodsp_palette)), #element_markdown is correct, but ignores paragraphs
         axis.text.y         = element_blank(), 
         axis.ticks.y        = element_blank(),
         panel.grid.minor    = element_blank(),
@@ -154,7 +155,6 @@ p3 <- df_pc1 %>%
         plot.title.position = "plot",
         legend.position     = "none",
         plot.margin         = unit(c(0.25, 0.5, 0.00, 0.3), "inches")) +
-  scale_x_discrete(position = "top") +
   scale_fill_manual(values = c(goodsp_palette)) +
   labs( x        = NULL, 
         y        = NULL,
@@ -175,7 +175,7 @@ p4 <- df_pc2 %>%
   theme(strip.text.x        = element_text(face = "bold.italic", size = 9, hjust = 0),
         strip.placement     = "outside",
         panel.spacing       = unit(.5, "lines"),
-        axis.text.x         = element_markdown(colour = c(mar3_palette)),
+        axis.text.x         = element_text(colour = c(mar3_palette)), #element_markdown is correct, but ignores paragraphs
         axis.text.y         = element_blank(), 
         axis.ticks.y        = element_blank(),
         panel.grid.minor    = element_blank(),
